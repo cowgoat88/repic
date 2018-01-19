@@ -1,0 +1,101 @@
+body {
+	width:100%;
+}
+.infinite-item {
+	max-width: 100%;
+	max-height: 100vh;
+	padding: 1px;
+	margin: 0;
+	padding-bottom:1px;
+	border: black;
+    border-style: solid;
+    border-width: 5px;
+    background-color: black;
+    overflow:hidden;
+}
+
+.img-responsive {
+	max-width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nav-buttons {
+	position: fixed;
+	display: block;
+	bottom:5%;
+	left:-5px;
+	width: 100%;
+	height:3%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.pagin-button {
+	width:45%;
+	height:50px;
+	border:solid;
+	border-radius: 10px;
+	border-color: blue;
+	border-style: double;
+	overflow:hidden;
+}
+
+.nav-but-back {
+	width:20%
+}
+.nav-but-random {
+	width:20%;
+}
+
+button {
+	color:gray;
+	background-color: black;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+button:hover, button:active {
+	border-style: solid;
+	background-color: white;
+	cursor:crosshair;
+}
+
+p {
+	font-size: 1.1em;
+	}
+
+.container {
+	width: 100%;
+
+}
+iframe {
+	height:100%;
+}
+
+
+.splash-container {
+    background:black;
+    height:100vh;
+}
+
+span.splash-header {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:10%;
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Monoton', cursive;
+}
+
+.splash-description {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: 'Audiowide', cursive;
+}

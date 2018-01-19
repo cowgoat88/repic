@@ -25,7 +25,7 @@ SECRET_KEY = 'cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.118']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
+    'repicimages',
 ]
 
 MIDDLEWARE = [
@@ -117,4 +119,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+
+ROOT_PATH = os.path.dirname(__file__)
+STATIC_ROOT = os.path.join(ROOT_PATH, 'static')
+
+STATICFILES_DIRS = (
+	os.path.join(BASE_DIR, 'repicimages/static/css'),
+)
+# Local Static
+'''
 STATIC_URL = '/static/'
+
+'''
+
+
+# AWS STATIC STORAGE!
+AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
+AWS_STORAGE_BUCKET_NAME = 'repicbot'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
