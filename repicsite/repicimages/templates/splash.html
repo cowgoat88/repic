@@ -15,6 +15,16 @@
 		</div>
 		<div class="splash-description"><p>The picture consolidator you dreamed of.</p></div>
 </div>
+	<form method="post">
+	<div class="well">
+	  <h4>Filter</h4>
+	  {% csrf_token %}
+	  {{ filter.as_p }}
+	<button type="submit" id="search">
+		<span class="glyphicon glyphicon-search"></span> Search
+	</button>
+	</div>
+</form>
 </div>
 
 {% endblock basecontent %}
