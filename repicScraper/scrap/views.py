@@ -1,11 +1,13 @@
-from .models import Submission
+from .models import Submission, SubredditsList
 from rest_framework import viewsets
 from django.http import HttpResponse
-from .serializers import SubmissionSerializer
+from .serializers import SubmissionSerializer, SubredditsListSerializer
 import praw
 import urllib3
 from bs4 import BeautifulSoup
 import certifi
+import requests
+import datetime
 
 def parse_album(url):
     manager = urllib3.PoolManager(
@@ -96,7 +98,7 @@ def pic_getter(subreddit):
         if not submission.url.endswith(('.jpg', '.JPG', '.png')):
             output = url_parser(submission.url)
             if output:
-                yield (output, submission.id, submission.score, submission.title, subreddit[1])
+                yield (output, submission.id, submission.score, submission.title, subreddit[1], submission.created)
             else:
                 pass
         else:
@@ -104,16 +106,19 @@ def pic_getter(subreddit):
                 pass
             else:
                 output = {'url':submission.url, 'sitetag':0}
-                yield (output,submission.id, submission.score, submission.title, subreddit[1])
+                yield (output,submission.id, submission.score, submission.title, subreddit[1], submission.created)
                 
 def submissionSet(request):
     """
     API endpoint to execute praw scraper.
     """
 
-    subreddits=[('infrastructureporn',0),('architectureporn',0),('DesignPorn',0),('InfraredPorn',0),('RoadPorn',0), ('cumsluts', 1)]
+    subreddits = requests.get('http://192.168.1.110:8000/subredditslist/subredditsList/')
+    subs = [(i.get('subreddit'), i.get('nsfw')) for i in subreddits.json()]
+    print(subs)
     db_items = []
-    for subreddit in subreddits:
+    for subreddit in subs:
+        print(subreddit)
         for item in pic_getter(subreddit):
             db_items.append(item)
     submission = Submission()
@@ -128,18 +133,33 @@ def submissionSet(request):
         submission.score = item[2]
         submission.title = item[3]
         submission.nsfw = item[4]
+        time = item[5]
+        submission.created = datetime.datetime.fromtimestamp(time)
         submission.save()
-    return httpResponse('hey')
+    return HttpResponse('hey')
     
 class SubmissionViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows view of praw output
     """
     queryset = Submission.objects.all()
-    for a in queryset:
-        print(a)
     serializer_class = SubmissionSerializer
+    
+class SubredditsListViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint to get subreddits list
+    """
+    queryset = SubredditsList.objects.all()
+    serializer_class = SubredditsListSerializer
 
-        
+def subredditsList(request):
+    """
+    View the subreddits list in the db set it if it's empty
+    """
+    subreddits = SubredditsList()
+    subs = subreddits.objects.all()
+    for sub in subs:
+        print(sub)
+    
         
         
