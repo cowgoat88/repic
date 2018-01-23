@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block extrahead %}
+<link href="https://fonts.googleapis.com/css?family=Audiowide|Monoton" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block basecontent %}
+
+
+<div class="container splash-container">
+<div class="row">
+	    <div class="col-12">
+			<span class="splash-header"><a href="{% url 'index' %}"><p>REPIC</p></a></span>
+		</div>
+		<div class="splash-description"><p>The picture consolidator you dreamed of.</p></div>
+</div>
+	<form method="post">
+	<div class="well">
+	  <h4>Filter</h4>
+	  {% csrf_token %}
+	  {{ filter.as_p }}
+	<button type="submit" id="search">
+		<span class="glyphicon glyphicon-search"></span> Search
+	</button>
+	</div>
+</form>
+</div>
+
+{% endblock basecontent %}
+
+{% block extrajs %}
+
+{% endblock extrajs %}
