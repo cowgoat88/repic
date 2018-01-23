@@ -118,12 +118,10 @@ def submissionSet(request):
     print(subs)
     db_items = []
     for subreddit in subs:
-        print(subreddit)
         for item in pic_getter(subreddit):
             db_items.append(item)
     submission = Submission()
     for item in db_items:
-        print(item)
         output = item[0]
         #print(output.get('url'), output.get('sitetag'), output.get('mp4'), item[1], item[2])
         submission.url = output.get('url')
