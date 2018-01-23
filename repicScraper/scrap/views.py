@@ -8,6 +8,8 @@ from bs4 import BeautifulSoup
 import certifi
 import requests
 import datetime
+from django.utils import timezone
+import pytz
 
 def parse_album(url):
     manager = urllib3.PoolManager(
@@ -98,7 +100,7 @@ def pic_getter(subreddit):
         if not submission.url.endswith(('.jpg', '.JPG', '.png')):
             output = url_parser(submission.url)
             if output:
-                yield (output, submission.id, submission.score, submission.title, subreddit[1], submission.created)
+                yield (output, submission.id, submission.score, submission.title, subreddit[1], submission.created, subreddit[0])
             else:
                 pass
         else:
@@ -106,7 +108,7 @@ def pic_getter(subreddit):
                 pass
             else:
                 output = {'url':submission.url, 'sitetag':0}
-                yield (output,submission.id, submission.score, submission.title, subreddit[1], submission.created)
+                yield (output,submission.id, submission.score, submission.title, subreddit[1], submission.created, subreddit[0])
                 
 def submissionSet(request):
     """
@@ -132,7 +134,8 @@ def submissionSet(request):
         submission.title = item[3]
         submission.nsfw = item[4]
         time = item[5]
-        submission.created = datetime.datetime.fromtimestamp(time)
+        submission.created = datetime.datetime.fromtimestamp(time, tz=pytz.UTC)
+        submission.subreddit = item[6]
         submission.save()
     return HttpResponse('hey')
     
