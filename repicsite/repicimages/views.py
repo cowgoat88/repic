@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from random import randint
-
+from .forms import SplashFilter
 
 links_per_page = 6
 
@@ -51,5 +51,7 @@ def random(request):
 
 
 def splash(request):
-    context = {}
+    splash_filter = SplashFilter(request.POST)
+
+    context = {'filter': splash_filter}
     return render(request,'splash.html',context)
