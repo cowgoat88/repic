@@ -20,5 +20,5 @@ from repicimages import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.splash, name='splash'),
-    path('images/', views.index, name='index'),
+    path('images/', views.images, name='images'),
 ]

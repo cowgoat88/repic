@@ -3,9 +3,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from random import randint
 from .forms import SplashFilter
 
+
 links_per_page = 6
 
-def index(request):
+def images(request):
 
     '''
     DATABASE INTEGRATION
@@ -13,6 +14,8 @@ def index(request):
     :return links to display:
     '''
 
+    if request.method == "POST":
+        print('butthole')
     links = ['www.google.com'] # placesavr for testing
 
     page = request.GET.get('page', 1)
@@ -24,7 +27,7 @@ def index(request):
     except EmptyPage:
         numbers = paginator.page(paginator.num_pages)
 
-    return render(request,'index.html', {'links': numbers})
+    return render(request,'images.html', {'links': numbers})
 
 
 def random(request):
@@ -52,6 +55,7 @@ def random(request):
 
 def splash(request):
     splash_filter = SplashFilter(request.POST)
-
+    if request.method == "POST":
+        print(request.POST.getlist('choice_field'))
     context = {'filter': splash_filter}
     return render(request,'splash.html',context)
