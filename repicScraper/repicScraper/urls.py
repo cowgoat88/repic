@@ -21,12 +21,14 @@ from scrap import views
 
 router = routers.DefaultRouter()
 router.register(r'submission', views.SubmissionViewSet)
+router.register(r'subredditsList', views.SubredditsListViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.submissionSet),
-    url(r'^praw/', include(router.urls))
-    #path('praw/', views.SubmissionViewSet)
+    url(r'^praw/', include(router.urls)),
+    path('subreddits/', views.subredditsList),
+    url(r'^subredditslist/', include(router.urls))
 ]
 #curl -H 'Accept: application/json; indent=4' -u admin:grooving http://127.0.0.1:8000/praw/
