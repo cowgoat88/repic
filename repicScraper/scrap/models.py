@@ -15,6 +15,7 @@ class Submission(models.Model):
     nsfw = models.IntegerField(null=True)
     sitetag = models.CharField(max_length=15)
     created = models.DateTimeField(null=False)
+    subreddit = models.CharField(max_length=20)
     
 class SubredditsList(models.Model):
     id = models.AutoField(primary_key=True, null=False, max_length=5)
