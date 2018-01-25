@@ -16,12 +16,29 @@ def images(request):
     splash_filter = SplashFilter(request.POST)
 
     if request.method == "GET":
-        context = {'filter': splash_filter}
-        return render(request, 'splash.html', context)
+        if request.GET.get('page'):
+            subreddits = request.GET.get('subreddits')
+            subreddits = subreddits.split('%')
+            links = Submission.objects.filter(subreddit__in=subreddits)
+            page = request.GET.get('page')
+            paginator = Paginator(links, links_per_page)
+            try:
+                numbers = paginator.page(page)
+            except PageNotAnInteger:
+                numbers = paginator.page(1)
+            except EmptyPage:
+                numbers = paginator.page(paginator.num_pages)
+            return render(request, 'images.html', {'links': numbers, 'subreddits': '%'.join(subreddits)})
+        else:
+            context = {'filter': splash_filter}
+            return render(request, 'splash.html', context)
 
     elif request.method == "POST":
         print(request.POST.getlist('choice_field'))
         print(len(Submission.objects.filter(subreddit__in=request.POST.getlist('choice_field'))))
+        subreddits = request.POST.getlist('choice_field')
+        subreddits = '%'.join(subreddits)
+        print(subreddits)
         links = Submission.objects.filter(subreddit__in=request.POST.getlist('choice_field'))
         page = request.GET.get('page', 1)
         paginator = Paginator(links, links_per_page)
@@ -32,7 +49,7 @@ def images(request):
         except EmptyPage:
             numbers = paginator.page(paginator.num_pages)
 
-        return render(request, 'images.html', {'links': numbers})
+        return render(request, 'images.html', {'links': numbers, 'subreddits': subreddits})
 
     links = ['google.com']
     page = request.GET.get('page', 1)
