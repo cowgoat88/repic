@@ -10,7 +10,7 @@
 			<div class="col-12 infinite-item">
 
 				{% if link.sitetag == 'gfycat' %}
-					<a href={{ link.url }}><div style='img-responsive position:relative;'><iframe src='{{ link.url }}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+					<a href={{ link.url }}><div style='img-responsive position:relative;'><iframe src='{{ link.url }}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:relative;height:100vh;top:0;left:0;' allowfullscreen></iframe></div>
 					</a>
 				{% elif link.sitetag == 'gifv' %}
 					<a href= {{ link.url }}><video preload="auto" autoplay="autoplay" loop="loop" style="width: 200px; height: 200px;">
@@ -39,8 +39,6 @@
 </div>
 </div>
 
-<div class="container">
-<div class="row">
 		<div class="col-12 col-centered">
 			<div class="nav-buttons">
 				{% if links.has_previous %}

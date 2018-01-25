@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'repicimages',
+    'zappa_django_utils',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +78,9 @@ WSGI_APPLICATION = 'repicsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+        'NAME': 'sqlite.db',
+        'BUCKET': 'repic-db'
     }
 }
 
@@ -127,7 +129,7 @@ STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, 'repicimages/static/css'),
 )
 # Local Static
-'''
+
 STATIC_URL = '/static/'
 
 '''
@@ -144,3 +146,4 @@ STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
+'''
