@@ -115,7 +115,7 @@ def submissionSet(request):
     API endpoint to execute praw scraper.
     """
 
-    subreddits = requests.get('http://192.168.1.110:8000/subredditslist/subredditsList/')
+    subreddits = requests.get('https://baj8ppw3tg.execute-api.us-east-1.amazonaws.com/dev/subredditslist/subredditsList/')
     subs = [(i.get('subreddit'), i.get('nsfw')) for i in subreddits.json()]
     print(subs)
     db_items = []
