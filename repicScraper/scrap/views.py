@@ -157,8 +157,7 @@ def subredditsList(request):
     """
     View the subreddits list in the db set it if it's empty
     """
-    subreddits = SubredditsList()
-    subs = subreddits.objects.all()
+    subs = SubredditsList.objects.all()
     for sub in subs:
         print(sub)
     
