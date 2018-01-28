@@ -13,6 +13,7 @@ class Submission(models.Model):
     sitetag = models.CharField(max_length=15)
     created = models.DateTimeField(null=False)
     subreddit = models.CharField(max_length=20)
+    subredditid = models.IntegerField( null=True)
 
 
 class SubredditsList(models.Model):
