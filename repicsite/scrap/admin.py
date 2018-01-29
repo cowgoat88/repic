@@ -9,4 +9,4 @@ class SubmissionAdmin(admin.ModelAdmin):
 
 @admin.register(SubredditsList)
 class SubredditsAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('id', 'subreddit', 'nsfw')
