@@ -2,7 +2,7 @@ from django import forms
 import requests
 from scrap.models import SubredditsList
 
-SUBREDDITS = [(item.subreddit,item.subreddit) for item in SubredditsList.objects.all()]
+SUBREDDITS = [(item.id,item.subreddit) for item in SubredditsList.objects.all()]
 
 class SplashFilter(forms.Form):
 	choice_field = forms.MultipleChoiceField(
