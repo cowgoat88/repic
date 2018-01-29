@@ -20,7 +20,6 @@ def images(request):
             subreddits = request.GET.get('subreddits')
             subreddits = subreddits.split('%')
             links = Submission.objects.filter(subreddit__in=subreddits).order_by('-score')[:50]
-            print('LINKS:', links)
             page = request.GET.get('page')
             paginator = Paginator(links, links_per_page)
             try:
@@ -40,7 +39,6 @@ def images(request):
         subreddits = request.POST.getlist('choice_field')
         subreddits = '%'.join(subreddits)
         print(subreddits)
-        #links = Submission.objects.filter(subreddit__in=request.POST.getlist('choice_field'))
         links = Submission.objects.filter(subreddit__in=request.POST.getlist('choice_field')).order_by('-score')[:50]
         print('Submissions:', links)
         page = request.GET.get('page', 1)
