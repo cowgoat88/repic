@@ -27,7 +27,7 @@
 				{% elif link.sitetag == 'flickr' %}
 					<a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE (flickr) - SKIP or CLICK THIS TO VIEW"/>
 					</a>
-				{% elif link.sitetag == 0 %}
+				{% elif link.sitetag == '0' %}
 					<a href={{ link.url }}><img class="img-responsive" src="{{ link.url}}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
                     </a>
                  {% endif %}

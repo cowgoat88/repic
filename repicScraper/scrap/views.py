@@ -115,8 +115,9 @@ def submissionSet(request):
     API endpoint to execute praw scraper.
     """
 
-    subreddits = requests.get('https://baj8ppw3tg.execute-api.us-east-1.amazonaws.com/dev/subredditslist/subredditsList/')
-    subs = [(i.get('subreddit'), i.get('nsfw')) for i in subreddits.json()]
+    #subreddits = requests.get('https://baj8ppw3tg.execute-api.us-east-1.amazonaws.com/dev/subredditslist/subredditsList/')
+    subreddits = SubredditsList.objects.all()
+    subs = [(sub.subreddit, sub.nsfw) for sub in subreddits]
     print(subs)
     db_items = []
     for subreddit in subs:
@@ -136,6 +137,8 @@ def submissionSet(request):
         time = item[5]
         submission.created = datetime.datetime.fromtimestamp(time, tz=pytz.UTC)
         submission.subreddit = item[6]
+        subredditobj = SubredditsList.objects.get(subreddit=item[6])
+        submission.subredditid = subredditobj.id
         submission.save()
     return HttpResponse('hey')
     

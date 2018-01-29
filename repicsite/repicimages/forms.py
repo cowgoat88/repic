@@ -1,11 +1,8 @@
 from django import forms
 import requests
+from scrap.models import SubredditsList
 
-
-db_json = requests.get('https://baj8ppw3tg.execute-api.us-east-1.amazonaws.com/dev/subredditslist/subredditsList/')
-
-SUBREDDITS = [(item.get('subreddit'),item.get('subreddit')) for item in db_json.json()]
-
+SUBREDDITS = [(item.subreddit,item.subreddit) for item in SubredditsList.objects.all()]
 
 class SplashFilter(forms.Form):
 	choice_field = forms.MultipleChoiceField(

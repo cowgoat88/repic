@@ -2,10 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from decimal import Decimal
-from django.forms import ModelForm
 
-# Create your models here.
 class Submission(models.Model):
     id = models.CharField(primary_key=True, null=False, max_length=15)
     title = models.CharField(max_length=40)
@@ -16,6 +13,7 @@ class Submission(models.Model):
     sitetag = models.CharField(max_length=15)
     created = models.DateTimeField(null=False)
     subreddit = models.CharField(max_length=20)
+    subredditid = models.IntegerField(null=True)
     
 class SubredditsList(models.Model):
     id = models.AutoField(primary_key=True, null=False, max_length=5)
