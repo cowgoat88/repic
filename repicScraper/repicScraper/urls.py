@@ -26,7 +26,7 @@ router.register(r'subredditsList', views.SubredditsListViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.submissionSet),
+    path('scrap/', views.submissionSet),
     url(r'^praw/', include(router.urls)),
     path('subreddits/', views.subredditsList),
     url(r'^subredditslist/', include(router.urls))

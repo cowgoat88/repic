@@ -16,9 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from repicimages import views
+from django.conf.urls import url
+from rest_framework import routers
+from scrap import views as scrap_views
+
+router = routers.DefaultRouter()
+router.register(r'submission', scrap_views.SubmissionViewSet)
+router.register(r'subredditsList', scrap_views.SubredditsListViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.images, name='images'),
+    path('', views.images, name='splash'),
     path('images/', views.images, name='images'),
+    path('scrap/', scrap_views.submissionSet),
+    url(r'^praw/', include(router.urls)),
+    path('subreddits/', scrap_views.subredditsList),
+    url(r'^subredditslist/', include(router.urls))
 ]
