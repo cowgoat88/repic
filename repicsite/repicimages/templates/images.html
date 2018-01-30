@@ -5,61 +5,61 @@
 
 <div class="container">
 <div class="row">
-		<div class="infinite-container">
-			{% for link in links %}
-			<div class="col-12 infinite-item">
+    <div class="infinite-container">
+      {% for link in links %}
+      <div class="col-12 infinite-item">
 
-				{% if link.sitetag == 'gfycat' %}
-					<a href={{ link.url }}><div style='img-responsive position:relative;'><iframe src='{{ link.url }}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:relative;height:100vh;top:0;left:0;' allowfullscreen></iframe></div>
-					</a>
-				{% elif link.sitetag == 'gifv' %}
-					<a href= {{ link.url }}><video preload="auto" autoplay="autoplay" loop="loop" style="width: 200px; height: 200px;">
-						<source src= {{ link.url }} type="video/webm"/>
-					</video>
-					</a>
-				{% elif link.sitetag == 'imgurgifv' %}
-					<video poster= {{ link.url }} preload="auto" autoplay="autoplay" muted="muted" loop="loop" webkit-playsinline="" style="width: 720px; height: 404px;">
-						<source src= {{ link.mp4 }} type="video/mp4">
-					</video>
-				{% elif link.sitetag == 'imguralbum' %}
-					<a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
-					</a>
-				{% elif link.sitetag == 'flickr' %}
-					<a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE (flickr) - SKIP or CLICK THIS TO VIEW"/>
-					</a>
-				{% elif link.sitetag == '0' %}
-					<a href={{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
-					</a>
-	  		{% endif %}
+        {% if link.sitetag == 'gfycat' %}
+          <a href={{ link.url }}><div style='img-responsive position:relative;'><iframe src='{{ link.url }}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:relative;height:100vh;top:0;left:0;' allowfullscreen></iframe></div>
+          </a>
+        {% elif link.sitetag == 'gifv' %}
+          <a href= {{ link.url }}><video preload="auto" autoplay="autoplay" loop="loop" style="width: 200px; height: 200px;">
+            <source src= {{ link.url }} type="video/webm"/>
+          </video>
+          </a>
+        {% elif link.sitetag == 'imgurgifv' %}
+          <video poster= {{ link.url }} preload="auto" autoplay="autoplay" muted="muted" loop="loop" webkit-playsinline="" style="width: 720px; height: 404px;">
+            <source src= {{ link.mp4 }} type="video/mp4">
+          </video>
+        {% elif link.sitetag == 'imguralbum' %}
+          <a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
+          </a>
+        {% elif link.sitetag == 'flickr' %}
+          <a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE (flickr) - SKIP or CLICK THIS TO VIEW"/>
+          </a>
+        {% elif link.sitetag == '0' %}
+          <a href={{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
+          </a>
+        {% endif %}
 
-			</div>
-			{% endfor %}
+      </div>
+      {% endfor %}
 
 </div>
 </div>
 </div>
 <div class="container">
 <div class="row">
-		<div class="col-12 col-centered">
-			<div class="nav-buttons">
-		
-				{% if links.has_previous %}
-					<a href="?page={{ links.previous_page_number }}&subreddits={{ subreddits }}">
-						<button class="pagin-button nav-but-back">
-						<p>&#171;Back</p>
-				</button></a>
-				{% endif %}
-		
-				{% if links.has_next %}
-					<a class="infinite-more-link" href="?page={{ links.next_page_number }}&subreddits={{ subreddits }}">
-						<button class="pagin-button" class="btn btn-secondary btn-block">
-							<p>Next&#187;</p>
-				</button></a>
-				{% endif %}
-		
+    <div class="col-12 col-centered">
+      <div class="nav-buttons">
+    
+        {% if links.has_previous %}
+          <a href="?page={{ links.previous_page_number }}&subreddits={{ subreddits }}">
+            <button class="pagin-button nav-but-back">
+            <p>&#171;Back</p>
+        </button></a>
+        {% endif %}
+    
+        {% if links.has_next %}
+          <a class="infinite-more-link" href="?page={{ links.next_page_number }}&subreddits={{ subreddits }}">
+            <button class="pagin-button" class="btn btn-secondary btn-block">
+              <p>Next&#187;</p>
+        </button></a>
+        {% endif %}
+    
 </div>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 
 {% endblock basecontent %}
