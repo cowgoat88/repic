@@ -8,7 +8,7 @@ class SplashFilter(forms.Form):
     choice_field = forms.MultipleChoiceField(
         required=False,
         label='Choose what you want to see:',
-        widget=forms.CheckboxSelectMultiple,
-        choices=SUBREDDITS
+        widget=forms.CheckboxSelectMultiple(attrs={'class':'form-checkbox'}),
+        choices=SUBREDDITS,
     )
 

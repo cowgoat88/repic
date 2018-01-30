@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'storages',
     'repicimages',
     'zappa_django_utils',
-    'scrap'
+    'scrap',
 ]
 
 MIDDLEWARE = [

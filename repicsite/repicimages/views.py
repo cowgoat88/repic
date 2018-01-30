@@ -47,8 +47,8 @@ def images(request):
             numbers = paginator.page(1)
         except EmptyPage:
             numbers = paginator.page(paginator.num_pages)
-        print(subreddits)
         return render(request, 'images.html', {'links': numbers, 'subreddits': subreddits})
+
 
     links = ['google.com']
     page = request.GET.get('page', 1)

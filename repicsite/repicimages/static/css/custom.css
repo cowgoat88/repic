@@ -102,3 +102,19 @@ span.splash-header {
     font-family: 'Audiowide', cursive;
 }
 
+#id_choice_field li {
+    display: inline-block;
+    border-style:ridge;
+    border-color:;
+    padding:1%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    text-align: center;
+    font-family: 'Audiowide', cursive;
+    font-size:1.5em;
+    color: #337ab7;
+
+    }
+
