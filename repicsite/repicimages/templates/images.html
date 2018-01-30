@@ -14,7 +14,7 @@
 					</a>
 				{% elif link.sitetag == 'gifv' %}
 					<a href= {{ link.url }}><video preload="auto" autoplay="autoplay" loop="loop" style="width: 200px; height: 200px;">
-					    <source src= {{ link.url }} type="video/webm"/>
+						<source src= {{ link.url }} type="video/webm"/>
 					</video>
 					</a>
 				{% elif link.sitetag == 'imgurgifv' %}
@@ -28,12 +28,12 @@
 					<a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE (flickr) - SKIP or CLICK THIS TO VIEW"/>
 					</a>
 				{% elif link.sitetag == '0' %}
-					<a href={{ link.url }}><img class="img-responsive" src="{{ link.url}}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
-                    </a>
-                 {% endif %}
+					<a href={{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
+					</a>
+	  		{% endif %}
 
 			</div>
-    {% endfor %}
+			{% endfor %}
 
 </div>
 </div>
@@ -42,21 +42,21 @@
 <div class="row">
 		<div class="col-12 col-centered">
 			<div class="nav-buttons">
-        
+		
 				{% if links.has_previous %}
-					<a href="?page={{ links.previous_page_number }}&subreddits={{subreddits}}">
+					<a href="?page={{ links.previous_page_number }}&subreddits={{ subreddits }}">
 						<button class="pagin-button nav-but-back">
 						<p>&#171;Back</p>
 				</button></a>
 				{% endif %}
-        
+		
 				{% if links.has_next %}
-					<a class="infinite-more-link" href="?page={{ links.next_page_number }}&subreddits={{subreddits}}">
+					<a class="infinite-more-link" href="?page={{ links.next_page_number }}&subreddits={{ subreddits }}">
 						<button class="pagin-button" class="btn btn-secondary btn-block">
 							<p>Next&#187;</p>
 				</button></a>
 				{% endif %}
-        
+		
 </div>
 		</div>
 	</div>
