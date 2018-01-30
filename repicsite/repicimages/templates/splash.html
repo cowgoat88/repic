@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-
 {% block extrahead %}
 <link href="https://fonts.googleapis.com/css?family=Audiowide|Monoton" rel="stylesheet">
 {% endblock extrahead %}
@@ -19,7 +18,7 @@
   <form method="post">
   <div class="well">
       {% csrf_token %}
-      {{ filter.as_p }}
+      {{ filter.as_table }}
     <button type="submit" id="search" action="{% url 'images' %}">
       <span class="glyphicon glyphicon-search"></span> Search
     </button>

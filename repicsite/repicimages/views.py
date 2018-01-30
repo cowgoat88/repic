@@ -35,10 +35,8 @@ def images(request):
 
     elif request.method == "POST":
         subredditids = request.POST.getlist('choice_field')
-        subredditids = [int(x) for x in subreddits]
-        #subreddits = '%'.join(subreddits)
-        print(subreddits)
-        links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
+        subredditids = [int(x) for x in subredditids]
+        links = Submission.objects.filter(subredditid__in=subredditids).order_by('-score')[:50]
         print('Submissions:', links)
         page = request.GET.get('page', 1)
         paginator = Paginator(links, links_per_page)
@@ -48,8 +46,8 @@ def images(request):
             numbers = paginator.page(1)
         except EmptyPage:
             numbers = paginator.page(paginator.num_pages)
-
-        return render(request, 'images.html', {'links': numbers, 'subreddits': subreddits})
+        
+        return render(request, 'images.html', {'links': numbers, 'subreddits': subredditids})
 
     links = ['google.com']
     page = request.GET.get('page', 1)
