@@ -25,10 +25,8 @@ router.register(r'subredditsList', views.SubredditsListViewSet)
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('scrap/', views.submissionSet),
+    path('scrap/', views.asyncScrap),
     url(r'^praw/', include(router.urls)),
-    path('subreddits/', views.subredditsList),
     url(r'^subredditslist/', include(router.urls))
 ]
 #curl -H 'Accept: application/json; indent=4' -u admin:grooving http://127.0.0.1:8000/praw/
