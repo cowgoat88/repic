@@ -1,5 +1,4 @@
 from django import forms
-import requests
 from scrap.models import SubredditsList
 
 SUBREDDITS = [(item.id,item.subreddit) for item in SubredditsList.objects.all()]
