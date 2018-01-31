@@ -4,9 +4,9 @@ from django.contrib import admin
 from .models import Submission, SubredditsList
 
 @admin.register(Submission)
-class ExplorationsAdmin(admin.ModelAdmin):
-	pass
+class SubmissionAdmin(admin.ModelAdmin):
+    pass
 
 @admin.register(SubredditsList)
 class SubredditsAdmin(admin.ModelAdmin):
-	pass
+    pass

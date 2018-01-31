@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Submission(models.Model):
+    class Meta:
+        db_table = 'scrap_submission'
     id = models.CharField(primary_key=True, null=False, max_length=15)
     title = models.CharField(max_length=40)
     score = models.IntegerField()
@@ -16,6 +18,8 @@ class Submission(models.Model):
     subredditid = models.IntegerField(null=True)
     
 class SubredditsList(models.Model):
+    class Meta:
+        db_table = 'scrap_subredditslist'
     id = models.AutoField(primary_key=True, null=False, max_length=5)
     subreddit = models.CharField(max_length=30)
     nsfw = models.IntegerField(null=True)

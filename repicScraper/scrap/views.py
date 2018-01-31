@@ -1,6 +1,6 @@
 from .models import Submission, SubredditsList
 from rest_framework import viewsets
-from django.http import HttpResponse
+from django.http import JsonResponse
 from .serializers import SubmissionSerializer, SubredditsListSerializer
 import praw
 import urllib3
@@ -10,6 +10,7 @@ import requests
 import datetime
 from django.utils import timezone
 import pytz
+from zappa.async import task
 
 def parse_album(url):
     manager = urllib3.PoolManager(
@@ -109,20 +110,18 @@ def pic_getter(subreddit):
             else:
                 output = {'url':submission.url, 'sitetag':0}
                 yield (output,submission.id, submission.score, submission.title, subreddit[1], submission.created, subreddit[0])
-                
-def submissionSet(request):
-    """
-    API endpoint to execute praw scraper.
-    """
 
-    #subreddits = requests.get('https://baj8ppw3tg.execute-api.us-east-1.amazonaws.com/dev/subredditslist/subredditsList/')
-    subreddits = SubredditsList.objects.all()
-    subs = [(sub.subreddit, sub.nsfw) for sub in subreddits]
-    print(subs)
+@task
+def getSubmissions(subredditid):
+    """
+    asynchonous praw scraper.
+    """
+    subreddits = SubredditsList.objects.filter(pk=subredditid)
+    sub = [(sub.subreddit, sub.nsfw) for sub in subreddits][0]
+    print(sub)
     db_items = []
-    for subreddit in subs:
-        for item in pic_getter(subreddit):
-            db_items.append(item)
+    for item in pic_getter(sub):
+        db_items.append(item)
     submission = Submission()
     for item in db_items:
         output = item[0]
@@ -140,7 +139,6 @@ def submissionSet(request):
         subredditobj = SubredditsList.objects.get(subreddit=item[6])
         submission.subredditid = subredditobj.id
         submission.save()
-    return HttpResponse('hey')
     
 class SubmissionViewSet(viewsets.ModelViewSet):
     """
@@ -155,14 +153,12 @@ class SubredditsListViewSet(viewsets.ModelViewSet):
     """
     queryset = SubredditsList.objects.all()
     serializer_class = SubredditsListSerializer
-
-def subredditsList(request):
-    """
-    View the subreddits list in the db set it if it's empty
-    """
-    subs = SubredditsList.objects.all()
-    for sub in subs:
-        print(sub)
     
+def asyncScrap(request):
+    subreddits = SubredditsList.objects.all()
+    for subreddit in subreddits:
+        subid = subreddit.id
+        getSubmissions(subid)
+    return JsonResponse({'status':'Success'}, status=200)
         
         
