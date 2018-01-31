@@ -118,3 +118,13 @@ span.splash-header {
 
     }
 
+.image-metadata {
+    display: block;
+    font-size: 0.75em;
+    font-color:gray;
+    background-color:white;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: 'Audiowide', cursive;
+    }

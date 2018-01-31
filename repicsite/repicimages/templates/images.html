@@ -8,7 +8,7 @@
     <div class="infinite-container">
       {% for link in links %}
       <div class="col-12 infinite-item">
-
+        <p class="image-metadata"><i class="fa fa-chevron-down" aria-hidden="true"></i>  |  {{ link.subreddit }}  |  Score: {{ link.score }}  |  Title: {{ link.title }}  |  </p>
         {% if link.sitetag == 'gfycat' %}
           <a href={{ link.url }}><div style='img-responsive position:relative;'><iframe src='{{ link.url }}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:relative;height:100vh;top:0;left:0;' allowfullscreen></iframe></div>
           </a>
