@@ -52,8 +52,3 @@ for child in children:
                 sublist.cat2 = cat3
                 sublist.cat3 = cat4
                 sublist.save()
-                
-                
-
-
-
