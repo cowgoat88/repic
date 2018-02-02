@@ -161,4 +161,3 @@ def asyncScrap(request):
         getSubmissions(subid)
     return JsonResponse({'status':'Success'}, status=200)
         
-        
