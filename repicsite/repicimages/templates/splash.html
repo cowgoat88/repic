@@ -13,9 +13,10 @@
   </div>
   <form method="post">
   <div class="well">
+      <label class="choice-label">  </label>
       {% csrf_token %}
       {{ filter.as_table }}
-    <button type="submit" id="search" action="{% url 'images' %}">
+    <button id='search-button' class='pagin-button' type="submit" id="search" action="{% url 'images' %}">
       <span class="glyphicon glyphicon-search"></span> Search
     </button>
     </div>
