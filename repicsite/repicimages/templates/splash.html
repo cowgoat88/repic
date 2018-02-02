@@ -11,16 +11,29 @@
     <div class="splash-description"><p>The picture consolidator you dreamed of.</p>
     </div>
   </div>
-  <form method="post">
-  <div class="well">
-      <label class="choice-label">  </label>
-      {% csrf_token %}
-      {{ filter.as_table }}
-    <button id='search-button' class='pagin-button' type="submit" id="search" action="{% url 'images' %}">
-      <span class="glyphicon glyphicon-search"></span> Search
-    </button>
-    </div>
-  </form>
+    <form method="post">
+        <div class="well">
+            <label class="choice-label"> </label>
+            {% csrf_token %}
+            {{ filter.as_table }}
+            <button id='search-button' class='pagin-button' type="submit" id="search" action="{% url 'images' %}">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
+    </form>
+    {% if nsfw_filter == False %}
+    {% else %}
+        <form id="nsfw-checkbox" method="post">
+            <div class="well">
+                <label class="choice-label"></label>
+                {% csrf_token %}
+                {{ nsfw_filter.as_table }}
+                <button type="submit" action="{% url 'images' %}">
+                    Are you over 18?
+                </button>
+            </div>
+        </form>
+    {% endif %}
 </div>
 
 {% endblock basecontent %}

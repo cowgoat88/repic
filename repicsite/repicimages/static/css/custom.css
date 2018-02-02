@@ -82,13 +82,17 @@ button:hover, button:active {
     font-size:1.3em;
     background-color: #ffffff;
     display: block;
-    position: fixed;
-    bottom: 10%;
-    left: 25%;
+    position: relative;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     }
+
+#nsfw-checkbox {
+    position: relative;
+    bottom: 0px;
+
+}
 
 p {
     font-size: 1.1em;
