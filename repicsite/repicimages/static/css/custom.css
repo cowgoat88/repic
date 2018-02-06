@@ -119,6 +119,7 @@ span.splash-header {
     margin-top:10%;
     text-align: center;
     font-size: 3em;
+    letter-spacing: .75em;c
     text-shadow: 1px 1px #ff0000;
     font-family: 'Monoton', cursive;
 }
@@ -189,6 +190,7 @@ span.splash-header {
     padding: 5px;
     box-shadow: 2px 5px 10px blue;
 	bottom: 10px;
+    background-color: black;
     }
 
 @media screen and (min-width:560px) {
