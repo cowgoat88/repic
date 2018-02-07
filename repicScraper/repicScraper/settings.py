@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import zappa_django_utils
+import platform
+
+if platform.platform().startswith('Linux'):
+	ENVIRONMENT = 'prod'
+else:
+	ENVIRONMENT = 'dev'
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -78,13 +85,22 @@ WSGI_APPLICATION = 'repicScraper.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-        'NAME': 'sqlite.db',
-        'BUCKET': 'repic-db'    
+if ENVIRONMENT == 'prod':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+            'NAME': 'sqlite.db',
+            'BUCKET': 'repic-db'    
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+            'NAME': 'sqlite-dev.db',
+            'BUCKET': 'repic-db'    
+        }
+    }
 
 
 # Password validation

@@ -23,6 +23,6 @@ class SubredditsList(models.Model):
     id = models.AutoField(primary_key=True, null=False, max_length=5)
     subreddit = models.CharField(max_length=30)
     nsfw = models.IntegerField(null=True)
-    
-    
-    
+    cat1 = models.CharField(max_length=30, default=None, null=True)
+    cat2 = models.CharField(max_length=30, default=None, null=True)
+    cat3 = models.CharField(max_length=30, default=None, null=True)
