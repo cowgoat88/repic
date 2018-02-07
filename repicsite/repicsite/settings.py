@@ -95,7 +95,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-            'NAME': 'sqlite-dev.db',
+            'NAME': 'sqlite-dev1.db',
             'BUCKET': 'repic-db'    
         }
     }
