@@ -89,7 +89,7 @@ if ENVIRONMENT == 'prod':
     DATABASES = {
         'default': {
             'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-            'NAME': 'testtestet.db',
+            'NAME': 'sqlite.db',
             'BUCKET': 'repic-db'    
         }
     }
