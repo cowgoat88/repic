@@ -15,11 +15,11 @@ exit with ctl x
   
 4. source ~/.bash_profile
 5. create root user:
-  mysqladmin -u root password {yourpasswordhere}
+  `mysqladmin -u root password {yourpasswordhere}`
 6. start the mysql local instance:
-  brew services start mysql
+  `brew services start mysql`
 7. (optional) log on to local mysql 
-  mysql -u root -p
+  `mysql -u root -p`
   {type your password on the next line}
 8. Install the django mysqlclient
   `pip install mysqlclient`
