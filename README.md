@@ -5,11 +5,13 @@ ASSUMING YOUR VIRTUALENV IS RUNNING
 3. add this to ~/.bash_profile:
   `export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/`
   
-  ```nano ~/.bash_profile
-  export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+```
+nano ~/.bash_profile
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
   
-  write the file with ctl o
-  exit with ctl x```
+write the file with ctl o
+exit with ctl x
+```
   
 4. source ~/.bash_profile
 5. create root user:
