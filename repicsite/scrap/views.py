@@ -116,7 +116,7 @@ def submissionSet(request):
     """
 
     #subreddits = requests.get('https://baj8ppw3tg.execute-api.us-east-1.amazonaws.com/dev/subredditslist/subredditsList/')
-    subreddits = SubredditsList.objects.all()
+    subreddits = SubredditsList.objects.all()[:2]
     subs = [(sub.subreddit, sub.nsfw) for sub in subreddits]
     print(subs)
     db_items = []

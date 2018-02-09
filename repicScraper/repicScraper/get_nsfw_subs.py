@@ -14,7 +14,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'repicScraper.settings')
 
 django.setup()
 
-from scrap.models import SubredditsList
+from scrap.models import SubredditsList, Submission
 
 url = 'https://www.reddit.com/r/ListOfSubreddits/wiki/nsfw'
 manager = urllib3.PoolManager(
@@ -45,27 +45,12 @@ for child in children:
     if child.name == 'a':
         if child.string.startswith('/r/'):
             if cat1 in ['General', 'Age', 'Animated', 'BDSM', 'Blowjobs']:
-                sublist = SubredditsList()
-                sublist.subreddit = child.string[3:]
-                sublist.nsfw = 1
-                sublist.cat1 = cat1
-                sublist.cat2 = cat2
-                sublist.cat3 = cat3
+                sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=cat1, cat2=cat2, cat3=cat3)
                 sublist.save()
             if cat1 == 'Amateur':
                 if cat3 == 'Ethnicity':
-                    sublist = SubredditsList()
-                    sublist.subreddit = child.string[3:]
-                    sublist.nsfw = 1
-                    sublist.cat1 = cat1
-                    sublist.cat2 = cat2
-                    sublist.cat3 = cat3
+                    sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=cat1, cat2=cat2, cat3=cat3)
                     sublist.save()
             if cat2 == 'Petite':
-                sublist = SubredditsList()
-                sublist.subreddit = child.string[3:]
-                sublist.nsfw = 1
-                sublist.cat1 = cat1
-                sublist.cat2 = cat2
-                sublist.cat3 = cat3
+                sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=cat1, cat2=cat2, cat3=cat3)
                 sublist.save()

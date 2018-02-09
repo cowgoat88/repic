@@ -45,10 +45,5 @@ for child in children:
     if child.name == 'a':
         if child.string.startswith('/r/'):
             if cat2 == 'Gifs' or cat2 == 'Images':
-                sublist = SubredditsList()
-                sublist.subreddit = child.string[3:]
-                sublist.nsfw = 0
-                sublist.cat1 = cat2
-                sublist.cat2 = cat3
-                sublist.cat3 = cat4
+                sublist = SubredditsList(subreddit=child.string[3:], nsfw=0, cat1=cat1, cat2=cat2, cat3=cat3)
                 sublist.save()
