@@ -31,7 +31,7 @@ SECRET_KEY = 'cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110']
+ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110', '127.0.0.1']
 
 
 # Application definition
@@ -95,7 +95,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-            'NAME': 'sqlite-dev1.db',
+            'NAME': 'sqlite-dev.db',
             'BUCKET': 'repic-db'    
         }
     }

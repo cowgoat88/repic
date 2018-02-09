@@ -82,8 +82,10 @@ button:hover, button:active {
     font-size:1.3em;
     background-color: #ffffff;
     display: block;
-    position: relative;
-    width: 50%;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 150px;
     margin-left: auto;
     margin-right: auto;
     }
@@ -118,7 +120,7 @@ span.splash-header {
     margin-top:10%;
     text-align: center;
     font-size: 3em;
-    letter-spacing: .75em;c
+    letter-spacing: .75em;
     text-shadow: 1px 1px #ff0000;
     font-family: 'Monoton', cursive;
 }
@@ -203,4 +205,17 @@ span.splash-header {
 
 ul {
     padding:0;
+    list-style: none;
     }
+
+li {
+    list-style: none;
+}
+
+li:hover {
+    background-color: #ffffff;
+}
+
+li:active {
+    background-color: green;
+}
