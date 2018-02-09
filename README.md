@@ -21,4 +21,4 @@ ASSUMING YOUR VIRTUALENV IS RUNNING
   {type your password on the next line}
 8. Install the django mysqlclient
   `pip install mysqlclient`
-  
+9. Update your settings file to connect to your local db
