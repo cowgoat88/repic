@@ -26,31 +26,14 @@ html = response.data
 soup = BeautifulSoup(html, 'html.parser')
 wiki = soup.find('div', {'class':'wiki'})
 children = wiki.findChildren()
-cat1 = ''
-cat2 = ''
-cat3 = ''
-cat4 = ''
-cat5 = ''
+
+(cat1, cat2, cat3) = ('','','')
+catedict = {'h1':cat1,'h2':cat2,'h3':cat3}
+
 for child in children:
-    if child.name == 'h1':
-        cat1 = child.string
-    if child.name == 'h2':
-        cat2 = child.string
-    if child.name == 'h3':
-        cat3 = child.string
-    if child.name == 'h4':
-        cat4 = child.string
-    if child.name == 'h5':
-        cat5 = child.string
-    if child.name == 'a':
-        if child.string.startswith('/r/'):
-            if cat1 in ['General', 'Age', 'Animated', 'BDSM', 'Blowjobs']:
-                sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=cat1, cat2=cat2, cat3=cat3)
-                sublist.save()
-            if cat1 == 'Amateur':
-                if cat3 == 'Ethnicity':
-                    sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=cat1, cat2=cat2, cat3=cat3)
-                    sublist.save()
-            if cat2 == 'Petite':
-                sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=cat1, cat2=cat2, cat3=cat3)
-                sublist.save()
+    if child.name in catedict:
+        catedict[child.name] = child.string
+    elif child.name == 'a' and child.string.startswith('/r/'):
+        if catdict['h1'] == 'Gifs' or catdict['h1'] == 'Images':
+            sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=catdict['h1'], cat2=catdict['h2'], cat3=catdict['h3'])
+            sublist.save()
