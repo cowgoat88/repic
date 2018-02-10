@@ -31,7 +31,7 @@ SECRET_KEY = 'cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110']
+ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110', '192.168.1.108']
 
 
 # Application definition
@@ -94,12 +94,14 @@ if ENVIRONMENT == 'prod':
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-            'NAME': 'sqlite-dev.db',
-            'BUCKET': 'repic-db'    
+            'ENGINE': 'django.db.backends.mysql', 
+            'NAME': 'repic',
+            'USER': 'root',
+            'PASSWORD': 'grooving',
+            'HOST': 'localhost',
+            'PORT': '3306'
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
