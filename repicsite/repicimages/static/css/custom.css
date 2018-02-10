@@ -41,6 +41,13 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
+@media screen and (orientation:landscape) {
+    .nav-buttons {
+        bottom: 12%;
+    }
+}
+
 .pagin-button {
     width:35%;
     height:50px;
@@ -82,8 +89,10 @@ button:hover, button:active {
     font-size:1.3em;
     background-color: #ffffff;
     display: block;
-    position: relative;
-    width: 50%;
+    position: fixed;
+    bottom: 10px;
+    right: 10%;
+    width: 200px;
     margin-left: auto;
     margin-right: auto;
     }
@@ -109,7 +118,6 @@ iframe {
 
 .splash-container {
     background:black;
-    height:100vh;
 }
 
 span.splash-header {
@@ -119,12 +127,14 @@ span.splash-header {
     margin-top:10%;
     text-align: center;
     font-size: 3em;
+    letter-spacing: .75em;
     text-shadow: 1px 1px #ff0000;
     font-family: 'Monoton', cursive;
 }
 
 .splash-description {
     display: block;
+    color: #787f8c;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -141,10 +151,17 @@ span.splash-header {
     margin-top: 0.1em;
     margin-bottom: 0.1em;
     text-align: left;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Mukta Mahee';
     font-size:1.5em;
     color: #337ab7;
     }
+
+@media screen and (min-width: 700px) {
+    #id_choice_field li {
+        display: inline-block;
+        width: 49%;
+    }
+}
 
 #id_choice_field label {
     width: 100%;
@@ -152,12 +169,13 @@ span.splash-header {
 
 .image-metadata {
     display: block;
-    font-size: 0.75em;
+    font-size: 1em;
     color:#ffffff;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Mukta Mahee';
     }
 
 .image-metadata-left {
@@ -166,12 +184,29 @@ span.splash-header {
     padding-left: 5%;
     }
 
+.image-metadata-center {
+    display: inline-block;
+    font-size: 0.75em;
+    max-width: 50%;
+}
+
+@media screen and (min-width: 500px) {
+    .image-metadata-center {
+        display: inline-block;
+        font-size: 1em;
+        max-width: 70%;
+    }
+    }
+
 .image-metadata-right {
     display: inline-block;
     float: right;
     padding-right: 5%;
     }
 
+.content-container {
+    display: block;
+}
 
 /* DJANGO FORM */
 
@@ -189,17 +224,35 @@ span.splash-header {
     padding: 5px;
     box-shadow: 2px 5px 10px blue;
 	bottom: 10px;
+    background-color: black;
     }
 
-@media screen and (min-width:560px) {
+@media screen and (min-width:385px) {
     .well {
-        max-width: 450px;
+        max-width: 385px;
         display: block;
         margin-left: auto;
         margin-right: auto;
      }
 
-
+@media screen and (min-width:700px) {
+     .well {
+         max-width: 550px;
+     }
+ }
 ul {
     padding:0;
+    list-style: none;
     }
+
+li {
+    list-style: none;
+}
+
+li:hover {
+    background-color: #ffffff;
+}
+
+li:active {
+        border-color: pink  ;
+}
