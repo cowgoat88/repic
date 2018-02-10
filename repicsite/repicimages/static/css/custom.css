@@ -90,6 +90,7 @@ button:hover, button:active {
     background-color: #ffffff;
     display: block;
     position: fixed;
+    z-index: 99;
     bottom: 10px;
     right: 10%;
     width: 200px;
@@ -160,6 +161,20 @@ span.splash-header {
     #id_choice_field li {
         display: inline-block;
         width: 49%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    #id_choice_field li {
+        display: inline-block;
+        width: 32%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #id_choice_field li {
+        display: inline-block;
+        width: 24%;
     }
 }
 
@@ -234,12 +249,20 @@ span.splash-header {
         margin-left: auto;
         margin-right: auto;
      }
+ }
 
-@media screen and (min-width:700px) {
+@media screen and (min-width:550px) {
      .well {
          max-width: 550px;
      }
  }
+
+ @media screen and (min-width:900px) {
+      .well {
+          max-width: 900px;
+      }
+  }
+
 ul {
     padding:0;
     list-style: none;

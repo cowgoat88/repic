@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import platform
 
+
 if platform.platform().startswith('Linux'):
 	ENVIRONMENT = 'prod'
 else:
@@ -26,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,15 +97,25 @@ if ENVIRONMENT == 'prod':
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql', 
-            'NAME': 'repic',
-            'USER': 'root',
-            'PASSWORD': 'grooving',
-            'HOST': 'localhost',
-            'PORT': '3306'
+            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+            'NAME': 'sqlite-dev1.db',
+            'BUCKET': 'repic-db'
         }
     }
 
+'''
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', 
+            'NAME': 'repic',
+            'USER': 'root',
+            'PASSWORD': os.environ['DB_USER'].
+            'HOST': os.environ['DB_PASSWORD'],
+            'PORT': '3306'
+        }
+    }
+'''
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
