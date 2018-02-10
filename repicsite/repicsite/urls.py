@@ -28,8 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.images, name='splash'),
     path('images/', views.images, name='images'),
-    path('scrap/', scrap_views.submissionSet),
-    url(r'^praw/', include(router.urls)),
     path('subreddits/', scrap_views.subredditsList),
     url(r'^subredditslist/', include(router.urls))
 ]

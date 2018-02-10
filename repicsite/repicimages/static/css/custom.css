@@ -134,6 +134,7 @@ span.splash-header {
 
 .splash-description {
     display: block;
+    color: #787f8c;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -253,5 +254,5 @@ li:hover {
 }
 
 li:active {
-        border-color: pink;
+        border-color: pink  ;
 }
