@@ -41,6 +41,13 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
+@media screen and (orientation:landscape) {
+    .nav-buttons {
+        bottom: 12%;
+    }
+}
+
 .pagin-button {
     width:35%;
     height:50px;
@@ -246,5 +253,5 @@ li:hover {
 }
 
 li:active {
-        border-color: green;
+        border-color: pink;
 }
