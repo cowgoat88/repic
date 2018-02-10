@@ -26,29 +26,14 @@ html = response.data
 soup = BeautifulSoup(html, 'html.parser')
 wiki = soup.find('div', {'class':'wiki'})
 children = wiki.findChildren()
-cat1 = ''
-cat2 = ''
-cat3 = ''
-cat4 = ''
-cat5 = ''
+
+(cat1, cat2, cat3) = ('','','')
+catedict = {'h1':cat1,'h2':cat2,'h3':cat3}
+
 for child in children:
-    if child.name == 'h1':
-        cat1 = child.string
-    if child.name == 'h2':
-        cat2 = child.string
-    if child.name == 'h3':
-        cat3 = child.string
-    if child.name == 'h4':
-        cat4 = child.string
-    if child.name == 'h5':
-        cat5 = child.string
-    if child.name == 'a':
-        if child.string.startswith('/r/'):
-            if cat2 == 'Gifs' or cat2 == 'Images':
-                sublist = SubredditsList()
-                sublist.subreddit = child.string[3:]
-                sublist.nsfw = 0
-                sublist.cat1 = cat2
-                sublist.cat2 = cat3
-                sublist.cat3 = cat4
-                sublist.save()
+    if child.name in catedict:
+        catedict[child.name] = child.string
+    elif child.name == 'a' and child.string.startswith('/r/'):
+        if catdict['h2'] == 'Gifs' or catdict['h2'] == 'Images':
+            sublist = SubredditsList(subreddit=child.string[3:], nsfw=1, cat1=catdict['h1'], cat2=catdict['h2'], cat3=catdict['h3'])
+            sublist.save()

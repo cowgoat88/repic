@@ -96,9 +96,12 @@ if ENVIRONMENT == 'prod':
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-            'NAME': 'sqlite-dev.db',
-            'BUCKET': 'repic-db'    
+            'ENGINE': 'django.db.backends.mysql', 
+            'NAME': 'repic',
+            'USER': 'root',
+            'PASSWORD': 'grooving',
+            'HOST': 'localhost',
+            'PORT': '3306'
         }
     }
 
