@@ -21,8 +21,9 @@ def images(request):
     if request.method == "GET":
         if request.GET.get('page'):
             subreddits = request.GET.get('subreddits')
-            subreddits = [str(x) for x in subreddits.split('%')]
+            subreddits = [str(x) for x in subreddits.split('!')]
             links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
+            print(links)
             page = request.GET.get('page')
             paginator = Paginator(links, links_per_page)
             try:
@@ -32,7 +33,7 @@ def images(request):
             except EmptyPage:
                 numbers = paginator.page(paginator.num_pages)
 
-            return render(request, 'images.html', {'links': numbers, 'subreddits': '%'.join([str(x) for x in subreddits])})
+            return render(request, 'images.html', {'links': numbers, 'subreddits': '!'.join([str(x) for x in subreddits])})
         else:
             context = {'nsfw_filter': nsfw_filter, 'filter': splash_filter}
             return render(request, 'splash.html', context)
@@ -50,7 +51,7 @@ def images(request):
         else:
             subreddits = request.POST.getlist('choice_field')
             links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
-            subreddits = '%'.join(subreddits)
+            subreddits = '!'.join(subreddits)
 
             page = request.GET.get('page', 1)
             paginator = Paginator(links, links_per_page)

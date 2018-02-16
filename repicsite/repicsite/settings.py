@@ -15,9 +15,9 @@ import platform
 
 
 if platform.platform().startswith('Linux'):
-	ENVIRONMENT = 'prod'
+    ENVIRONMENT = 'prod'
 else:
-	ENVIRONMENT = 'dev'
+    ENVIRONMENT = 'dev'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'storages',
     'repicimages',
     'zappa_django_utils',
@@ -103,19 +104,6 @@ else:
         }
     }
 
-'''
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql', 
-            'NAME': 'repic',
-            'USER': 'root',
-            'PASSWORD': os.environ['DB_USER'].
-            'HOST': os.environ['DB_PASSWORD'],
-            'PORT': '3306'
-        }
-    }
-'''
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -157,10 +145,10 @@ ROOT_PATH = os.path.dirname(__file__)
 STATIC_ROOT = os.path.join(ROOT_PATH, 'static')
 
 STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'repicimages/static/css'),
+    os.path.join(BASE_DIR, 'repicimages/static/css'),
 )
 # Local Static
-
+'''
 STATIC_URL = '/static/'
 
 '''
@@ -176,5 +164,3 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-'''

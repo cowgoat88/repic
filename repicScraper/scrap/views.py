@@ -68,23 +68,7 @@ def url_parser(url):
             output['sitetag'] = 'imgurgifv'
             output['url'] = url.replace('gifv', 'jpg')
             output['mp4'] = url.replace('gifv', 'mp4')
-        elif 'imgur.com/' in url:
-            print('imgur album handling...')
-            urls = parse_album(url)
-            if urls:
-                url = urls[0]
-                if url.endswith('mp4'):
-                    output['sitetag'] = 'imgurgifv'
-                    output['url'] = url.replace('mp4', 'jpg')
-                    output['mp4'] = url
-                    #output['urls'] = urls
-                elif url.endswith(('jpg', 'JPG', 'png', 'PNG')):
-                    output['sitetag'] = 0
-                    output['url'] = url
-                else:
-                    pass
-            else:
-                output = {}
+
         elif 'flickr' in url:
             output['url'] = flickr_parser(url)
             output['sitetag'] = 'flickr'
@@ -123,23 +107,27 @@ def getSubmissions(subredditid):
     for item in pic_getter(sub):
         db_items.append(item)
     submission = Submission()
-    for item in db_items:
-        output = item[0]
-        #print(output.get('url'), output.get('sitetag'), output.get('mp4'), item[1], item[2])
-        submission.url = output.get('url')
-        submission.sitetag = output.get('sitetag')
-        submission.mp4 = output.get('mp4')
-        submission.id = item[1]
-        submission.score = item[2]
-        submission.title = item[3]
-        submission.nsfw = item[4]
-        time = item[5]
-        submission.created = datetime.datetime.fromtimestamp(time, tz=pytz.UTC)
-        submission.subreddit = item[6]
-        subredditobj = SubredditsList.objects.get(subreddit=item[6])
-        submission.subredditid = subredditobj.id
-        submission.save()
-    
+    try:
+        for item in db_items:
+            output = item[0]
+            #print(output.get('url'), output.get('sitetag'), output.get('mp4'), item[1], item[2])
+            submission.url = output.get('url')
+            submission.sitetag = output.get('sitetag')
+            submission.mp4 = output.get('mp4')
+            submission.id = item[1]
+            submission.score = item[2]
+            submission.title = item[3]
+            submission.nsfw = item[4]
+            time = item[5]
+            submission.created = datetime.datetime.fromtimestamp(time, tz=pytz.UTC)
+            submission.subreddit = item[6]
+            subredditobj = SubredditsList.objects.get(subreddit=item[6])
+            submission.subredditid = subredditobj.id
+            print(submission)
+            submission.save()
+    except:
+        pass
+
 class SubmissionViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows view of praw output

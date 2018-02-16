@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'repicScraper.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
+'''
 if ENVIRONMENT == 'prod':
     DATABASES = {
         'default': {
@@ -93,7 +93,17 @@ if ENVIRONMENT == 'prod':
             'BUCKET': 'repic-db'    
         }
     }
-else:
+'''
+
+DATABASES = {
+        'default': {
+            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+            'NAME': 'sqlite-dev1.db',
+            'BUCKET': 'repic-db'
+        }
+    }
+
+'''else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql', 
@@ -104,7 +114,7 @@ else:
             'PORT': '3306'
         }
     }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
