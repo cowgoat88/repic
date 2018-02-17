@@ -1,0 +1,13 @@
+{
+    "dev": {
+        "aws_region": "us-east-1",
+        "django_settings": "repicsite.settings",
+        "profile_name": "default",
+        "project_name": "repicsite",
+        "runtime": "python3.6",
+        "s3_bucket": "zappa-repic",
+        "environment_variables": {
+          "SECRET_KEY": "cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln"
+        },
+    }
+}

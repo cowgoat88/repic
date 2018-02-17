@@ -74,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'repicScraper.wsgi.application'
 
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

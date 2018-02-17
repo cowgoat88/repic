@@ -163,6 +163,20 @@ span.splash-header {
     }
 }
 
+@media screen and (min-width: 900px) {
+    #id_choice_field li {
+        display: inline-block;
+        width: 32%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #id_choice_field li {
+        display: inline-block;
+        width: 24%;
+    }
+}
+
 #id_choice_field label {
     width: 100%;
 }
@@ -234,12 +248,20 @@ span.splash-header {
         margin-left: auto;
         margin-right: auto;
      }
+ }
 
-@media screen and (min-width:700px) {
+@media screen and (min-width:550px) {
      .well {
          max-width: 550px;
      }
  }
+
+ @media screen and (min-width:900px) {
+      .well {
+          max-width: 900px;
+      }
+  }
+
 ul {
     padding:0;
     list-style: none;
