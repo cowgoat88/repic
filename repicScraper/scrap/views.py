@@ -68,23 +68,23 @@ def url_parser(url):
             output['sitetag'] = 'imgurgifv'
             output['url'] = url.replace('gifv', 'jpg')
             output['mp4'] = url.replace('gifv', 'mp4')
-        elif 'imgur.com/' in url:
-            print('imgur album handling...')
-            urls = parse_album(url)
-            if urls:
-                url = urls[0]
-                if url.endswith('mp4'):
-                    output['sitetag'] = 'imgurgifv'
-                    output['url'] = url.replace('mp4', 'jpg')
-                    output['mp4'] = url
-                    #output['urls'] = urls
-                elif url.endswith(('jpg', 'JPG', 'png', 'PNG')):
-                    output['sitetag'] = 0
-                    output['url'] = url
-                else:
-                    pass
-            else:
-                output = {}
+        # '''elif 'imgur.com/' in url:
+        #     print('imgur album handling...')
+        #     urls = parse_album(url)
+        #     if urls:
+        #         url = urls[0]
+        #         if url.endswith('mp4'):
+        #             output['sitetag'] = 'imgurgifv'
+        #             output['url'] = url.replace('mp4', 'jpg')
+        #             output['mp4'] = url
+        #             #output['urls'] = urls
+        #         elif url.endswith(('jpg', 'JPG', 'png', 'PNG')):
+        #             output['sitetag'] = 0
+        #             output['url'] = url
+        #         else:
+        #             pass
+        #     else:
+        #         output = {}'''
         elif 'flickr' in url:
             output['url'] = flickr_parser(url)
             output['sitetag'] = 'flickr'

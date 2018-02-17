@@ -12,13 +12,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import zappa_django_utils
-import platform
-
-if platform.platform().startswith('Linux'):
-	ENVIRONMENT = 'prod'
-else:
-	ENVIRONMENT = 'dev'
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,7 +26,7 @@ SECRET_KEY = 'h=m6_bgdt3xfo$gv0dox+-k#)=481ssax&jl_69++3-i%ov7m-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.1.110', '192.168.1.118', 'baj8ppw3tg.execute-api.us-east-1.amazonaws.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.1.110', '192.168.1.118', '192.168.1.108', 'baj8ppw3tg.execute-api.us-east-1.amazonaws.com']
 
 
 # Application definition
@@ -80,31 +73,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'repicScraper.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-if ENVIRONMENT == 'prod':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-            'NAME': 'sqlite.db',
-            'BUCKET': 'repic-db'    
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql', 
-            'NAME': 'repic',
-            'USER': 'root',
-            'PASSWORD': 'grooving',
-            'HOST': 'localhost',
-            'PORT': '3306'
-        }
-    }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
