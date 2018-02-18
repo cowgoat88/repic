@@ -5,11 +5,12 @@ import os
 from tempfile import gettempdir
 
 class DatabaseWrapper():
-    def __init__(self):
+    def __init__(self, database):
         # create lazy handle for remote object
         self.s3obj = self.get_s3_object()
         # set name of local copy
         self.local_db = os.path.abspath(os.path.join(gettempdir(), self.s3obj.key))
+        self.database = database
 
     def get_s3_resource(self):
         # get s3 client
@@ -42,9 +43,9 @@ class DatabaseWrapper():
             self.s3obj.upload_file(self.local_db)
             
     def get_max_id(self):
-        sql = 'SELECT MAX(id) FROM scrap_subredditslist'
+        sql = 'SELECT MAX(id) FROM ?'
         c = self.conn.cursor()
-        c.execute(sql)
+        c.execute(sql, (self.database))
         max_id = c.fetchone()
         return max_id[0]
         
