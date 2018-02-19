@@ -1,17 +1,45 @@
 from django import forms
 from scrap.models import SubredditsList
-
+from django.forms import widgets
 
 SUBREDDITS = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=0)]
 SUBREDDITS_NSFW_ONLY = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=1)]
 SUBREDDITS_ALL = [(item.id,item.subreddit) for item in SubredditsList.objects.all()]
 NSFW = [('allow','Include NSFW?'),('only','Only NSFW?')]
 
+#KICKASS META PROGRAMMING add the following class to widgets
+widgets.__all__ = list(widgets.__all__).append('CustomCheckboxSelectMultiple')
+
+class CustomCheckboxSelectMultiple(widgets.ChoiceWidget):
+    allow_multiple_selected = True
+    input_type = 'checkbox'
+    template_name = 'widgets/checkbox_select_custom.html'
+    option_template_name = 'widgets/checkbox_option.html'
+
+    def use_required_attribute(self, initial):
+        # Don't use the 'required' attribute because browser validation would
+        # require all checkboxes to be checked instead of at least one.
+        return False
+
+    def value_omitted_from_data(self, data, files, name):
+        # HTML checkboxes don't appear in POST data if not checked, so it's
+        # never known if the value is actually omitted.
+        return False
+
+    def id_for_label(self, id_, index=None):
+        """"
+        Don't include for="field_0" in <label> because clicking such a label
+        would toggle the first checkbox.
+        """
+        if index is None:
+            return ''
+        return super().id_for_label(id_, index)
+        
 class SplashFilter(forms.Form):
     choice_field = forms.MultipleChoiceField(
         required = False,
         label = '',
-        widget = forms.CheckboxSelectMultiple(attrs={'class':'form-checkbox'}),
+        widget = CustomCheckboxSelectMultiple(attrs={'class':'form-checkbox'}),
         choices = SUBREDDITS,
     )
 
@@ -19,7 +47,7 @@ class FilterAll(forms.Form):
     choice_field = forms.MultipleChoiceField(
         required=False,
         label='',
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
+        widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
         choices=SUBREDDITS_ALL,
     )
 
@@ -27,7 +55,7 @@ class NsfwOnlyFilter(forms.Form):
     choice_field = forms.MultipleChoiceField(
         required=False,
         label='',
-        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
+        widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
         choices=SUBREDDITS_NSFW_ONLY,
     )
 
@@ -36,6 +64,6 @@ class NsfwAllow(forms.Form):
     nsfw_field = forms.MultipleChoiceField(
         required = False,
         label = '',
-        widget = forms.CheckboxSelectMultiple,
+        widget = CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
         choices = NSFW,
     )
