@@ -284,3 +284,6 @@ input {
     background: #ffffff;
 }
 
+video {
+    width: 100% !important
+    }
