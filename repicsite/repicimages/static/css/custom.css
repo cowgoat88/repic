@@ -1,6 +1,13 @@
 body {
     width:100%;
 }
+
+.infinite-container {
+    width: 100%;
+    width: -webkit-fill-available;
+
+    }
+
 .infinite-item {
     max-width: 100%;
     max-height: 100vh;
@@ -33,7 +40,7 @@ body {
 .nav-buttons {
     position: fixed;
     display: block;
-    bottom:0%;
+    bottom: 2em;
     left:-5px;
     width: 100%;
     height:3%;
@@ -136,6 +143,14 @@ span.splash-header {
     font-family: 'Monoton', cursive;
 }
 
+
+@media screen and (max-width:480px) {
+     span.splash-header p {
+        font-size: 1em;
+        letter-spacing: .5em;
+     }
+ }
+
 .splash-description {
     display: block;
     color: #787f8c;
@@ -159,6 +174,10 @@ span.splash-header {
     font-size:1.5em;
     color: #337ab7;
     }
+
+.label:active {
+    background-color:#787f8c;
+     }
 
 @media screen and (min-width: 700px) {
     #id_choice_field .subreddit {
@@ -277,6 +296,7 @@ ul {
 
 li {
     list-style: none;
+    overflow: hidden;
 }
 
 .subreddit:hover {
