@@ -33,7 +33,7 @@ body {
 .nav-buttons {
     position: fixed;
     display: block;
-    bottom:5%;
+    bottom:0%;
     left:-5px;
     width: 100%;
     height:3%;
@@ -58,17 +58,20 @@ body {
     overflow:hidden;
 }
 
-.nav-but-back {
+.nav-but-control {
     width:35%;
+    padding-top: .5em;
 }
 .nav-but-home {
     width:17%;
     text-align: center;
+
 }
 
 .nav-but-random {
     width:20%;
 }
+
 
 button {
     color:gray;
@@ -109,6 +112,7 @@ p {
 
 .container {
     width: 100%;
+    margin-bottom:30px;
 
 }
 iframe {
@@ -200,13 +204,21 @@ span.splash-header {
     max-width: 50%;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 900px) {
     .image-metadata-center {
         display: inline-block;
         font-size: 1em;
         max-width: 70%;
     }
+}
+
+@media screen and (max-width: 499px) {
+    .image-metadata-center {
+        display: none;
+        font-size: 1em;
+        max-width: 70%;
     }
+}
 
 .image-metadata-right {
     display: inline-block;
@@ -285,5 +297,18 @@ input {
 }
 
 video {
-    width: 100% !important
+    width: 100% !important;
     }
+
+video:hover {
+    autoplay: autoplay;
+    }
+
+.row {
+    max-width: 100%;
+    margin: 0;
+    }
+
+.container {
+    padding-left: 0;
+}
