@@ -22,8 +22,8 @@ $('.subreddit').click(function(e) {
     highlight($(this));
     });
 
-$(".subreddit li label input").click(function(e) {
+$(".subreddit li label input").onclick(function(e) {
     e.stopPropagation();
-    highlight($(this).parent().parent());
+    highlight($(this).parents("div"));
    });
 });

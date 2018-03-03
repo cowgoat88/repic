@@ -132,6 +132,7 @@ iframe {
 
 span.splash-header {
     display: block;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top:10%;
@@ -145,7 +146,7 @@ span.splash-header {
 
 @media screen and (max-width:480px) {
      span.splash-header p {
-        font-size: 1em;
+        font-size: .75em;
         letter-spacing: .5em;
      }
  }
