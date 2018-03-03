@@ -2,7 +2,8 @@
 $(document).ready(function() {
 
     function highlight(element) {
-      if (element.is('div')) {
+      if (element.is('div' || 'li' || 'input')) {
+        console.log('div')
         if (element.hasClass('clicked')) {
           element.removeClass('clicked');
         } else {
@@ -17,6 +18,7 @@ $(document).ready(function() {
       }
     }
 
+
     $('.subreddit').click(function(e) {
         highlight($(this));
     });
@@ -24,5 +26,6 @@ $(document).ready(function() {
     $(".subreddit li label input").click(function(e) {
         e.stopPropagation();
         highlight($(this).parent().parent());
+
    });
 });
