@@ -8,7 +8,6 @@ $(document).ready(function() {
         } else {
           element.addClass('clicked');
         }
-        console.log(element.find('input'[0]))
         var subreddit = element.find('input')[0];
         if (subreddit.checked == false) {
           subreddit.checked = true;
@@ -18,12 +17,12 @@ $(document).ready(function() {
       }
     }
 
-$('.subreddit').click(function(e) {
-    highlight($(this));
+    $('.subreddit').click(function(e) {
+        highlight($(this));
     });
 
-$(".subreddit li label input").onclick(function(e) {
-    e.stopPropagation();
-    highlight($(this).parents("div"));
+    $(".subreddit li label input").click(function(e) {
+        e.stopPropagation();
+        highlight($(this).parent().parent());
    });
 });

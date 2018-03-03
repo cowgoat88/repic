@@ -28,8 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = 'cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln'
-
+SERCRET_KEY = os.environ.get('REPIC_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -149,7 +148,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'repicimages/static/css'),
 )
 # Local Static
-
+'''
 STATIC_URL = '/static/'
 
 
@@ -165,4 +164,3 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-'''
