@@ -26,9 +26,9 @@
           </video>
           </a>
         {% elif link.sitetag == 'imgurgifv' %}
-          <video poster= {{ link.url }} preload="metadata" muted="muted" loop="loop" webkit-playsinline="" >
+          <a href={{ link.url }}><video poster= {{ link.url }} preload="metadata" muted="muted" loop="loop" webkit-playsinline="" >
             <source src= {{ link.mp4 }} type="video/mp4">
-          </video>
+          </video></a>
         {% elif link.sitetag == 'imguralbum' %}
           <a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
           </a>
