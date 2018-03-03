@@ -1,6 +1,21 @@
 
 $(document).ready(function() {
-
+      function highlight(element) {
+      if (element.is('li' || 'input')) {
+        console.log('li')
+        if (element.hasClass('clicked')) {
+          element.removeClass('clicked');
+        } else {
+          element.addClass('clicked');
+        }
+        var subreddit = element.find('input')[0];
+        if (subreddit.checked == false) {
+          subreddit.checked = true;
+        } else {
+          subreddit.checked = false;
+        }
+      }
+    }
     function highlight(element) {
       if (element.is('div' || 'li' || 'input')) {
         console.log('div')
@@ -17,6 +32,7 @@ $(document).ready(function() {
         }
       }
     }
+
 
 
     $('.subreddit').click(function(e) {
