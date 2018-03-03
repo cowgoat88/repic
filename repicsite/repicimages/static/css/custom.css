@@ -118,7 +118,7 @@ p {
 
 .container {
     width: 100%;
-    margin-bottom:30px;
+    padding-bottom: 5em;
 
 }
 iframe {
@@ -161,8 +161,8 @@ span.splash-header {
 
 #id_choice_field .subreddit {
     display: block;
-    border-style:ridge;
-    border-color:;
+    border-style: solid;
+    border-color: #413e51;
     padding-left:1%;
     margin-left: auto;
     margin-right: auto;
@@ -171,7 +171,7 @@ span.splash-header {
     text-align: left;
     font-family: 'Mukta Mahee';
     font-size:1.5em;
-    color: #337ab7;
+    color: #97afdb;
     }
 
 .label:active {
@@ -311,8 +311,9 @@ input {
     opacity: 0;
 }
 
-.clicked {
+#id_choice_field .clicked {
     background: #ffffff;
+    border-color: black;
 }
 
 video {
@@ -327,7 +328,3 @@ video:hover {
     max-width: 100%;
     margin: 0;
     }
-
-.container {
-    padding-left: 0;
-}
