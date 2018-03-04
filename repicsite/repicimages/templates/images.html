@@ -21,14 +21,14 @@
           <a href={{ link.url }}><div style='img-responsive position:relative;'><iframe src='{{ link.url }}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:relative;height:100vh;top:0;left:0;' allowfullscreen></iframe></div>
           </a>
         {% elif link.sitetag == 'gifv' %}
-          <a href= {{ link.url }}><video preload="auto" autoplay="autoplay" loop="loop" style="width: 200px; height: 200px;">
+          <a href= {{ link.url }}><video preload="metadata" loop="loop">
             <source src= {{ link.url }} type="video/webm"/>
           </video>
           </a>
         {% elif link.sitetag == 'imgurgifv' %}
-          <video poster= {{ link.url }} preload="auto" autoplay="autoplay" muted="muted" loop="loop" webkit-playsinline="" style="width: 720px; height: 404px;">
+          <a href={{ link.url }}><video poster= {{ link.url }} preload="metadata" muted="muted" loop="loop" webkit-playsinline="" >
             <source src= {{ link.mp4 }} type="video/mp4">
-          </video>
+          </video></a>
         {% elif link.sitetag == 'imguralbum' %}
           <a href= {{ link.url }}><img class="img-responsive" src="{{ link.url }}" alt="BROKE IMAGE - SKIP or CLICK THIS TO VIEW"/>
           </a>
@@ -53,16 +53,17 @@
       <div class="nav-buttons">
 
         {% if links.has_previous %}
-          <a href="?page={{ links.previous_page_number }}&subreddits={{ subreddits }}">
-            <button class="pagin-button nav-but-back">
+          <a  class="infinite-more-link" href="?page={{ links.previous_page_number }}&subreddits={{ subreddits }}">
+            <button class="pagin-button nav-but-control">
             <p>&#171;Back</p>
         </button></a>
         {% endif %}
-          <a class="infinite-more-link" href="{% url 'images' %}"><button class="pagin-button nav-but-home">
+          <a class="infinite-more-link" href="{% url 'images' %}">
+            <button class="pagin-button nav-but-home">
               <i class="fas fa-home"></i></button></a>
         {% if links.has_next %}
           <a class="infinite-more-link" href="?page={{ links.next_page_number }}&subreddits={{ subreddits }}">
-            <button class="pagin-button" class="btn btn-secondary btn-block">
+            <button class="pagin-button nav-but-control">
               <p>Next&#187;</p>
         </button></a>
         {% endif %}

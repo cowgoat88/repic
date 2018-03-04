@@ -1,6 +1,13 @@
 body {
     width:100%;
 }
+
+.infinite-container {
+    width: 100%;
+    width: -webkit-fill-available;
+
+    }
+
 .infinite-item {
     max-width: 100%;
     max-height: 100vh;
@@ -33,7 +40,7 @@ body {
 .nav-buttons {
     position: fixed;
     display: block;
-    bottom:5%;
+    bottom: 2em;
     left:-5px;
     width: 100%;
     height:3%;
@@ -58,17 +65,20 @@ body {
     overflow:hidden;
 }
 
-.nav-but-back {
+.nav-but-control {
     width:35%;
+    padding-top: .5em;
 }
 .nav-but-home {
     width:17%;
     text-align: center;
+
 }
 
 .nav-but-random {
     width:20%;
 }
+
 
 button {
     color:gray;
@@ -82,7 +92,6 @@ button {
 button:hover, button:active {
     border-style: solid;
     background-color: white;
-    cursor:crosshair;
 }
 
 #search-button {
@@ -109,6 +118,7 @@ p {
 
 .container {
     width: 100%;
+    padding-bottom: 5em;
 
 }
 iframe {
@@ -122,6 +132,7 @@ iframe {
 
 span.splash-header {
     display: block;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top:10%;
@@ -131,6 +142,14 @@ span.splash-header {
     text-shadow: 1px 1px #ff0000;
     font-family: 'Monoton', cursive;
 }
+
+
+@media screen and (max-width:480px) {
+     span.splash-header p {
+        font-size: .75em;
+        letter-spacing: .5em;
+     }
+ }
 
 .splash-description {
     display: block;
@@ -143,9 +162,9 @@ span.splash-header {
 
 #id_choice_field .subreddit {
     display: block;
-    border-style:ridge;
-    border-color:;
-    padding:1%;
+    border-style: solid;
+    border-color: #413e51;
+    padding-left:1%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0.1em;
@@ -153,8 +172,12 @@ span.splash-header {
     text-align: left;
     font-family: 'Mukta Mahee';
     font-size:1.5em;
-    color: #337ab7;
+    color: #97afdb;
     }
+
+.label:active {
+    background-color:#787f8c;
+     }
 
 @media screen and (min-width: 700px) {
     #id_choice_field .subreddit {
@@ -200,13 +223,21 @@ span.splash-header {
     max-width: 50%;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 900px) {
     .image-metadata-center {
         display: inline-block;
         font-size: 1em;
         max-width: 70%;
     }
+}
+
+@media screen and (max-width: 499px) {
+    .image-metadata-center {
+        display: none;
+        font-size: 1em;
+        max-width: 70%;
     }
+}
 
 .image-metadata-right {
     display: inline-block;
@@ -265,6 +296,7 @@ ul {
 
 li {
     list-style: none;
+    overflow: hidden;
 }
 
 .subreddit:hover {
@@ -280,7 +312,20 @@ input {
     opacity: 0;
 }
 
-.clicked {
+#id_choice_field .clicked {
     background: #ffffff;
+    border-color: black;
 }
 
+video {
+    width: 100% !important;
+    }
+
+video:hover {
+    autoplay: autoplay;
+    }
+
+.row {
+    max-width: 100%;
+    margin: 0;
+    }

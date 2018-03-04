@@ -23,7 +23,6 @@ def images(request):
             subreddits = request.GET.get('subreddits')
             subreddits = [str(x) for x in subreddits.split('!')]
             links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
-            print(links)
             page = request.GET.get('page')
             paginator = Paginator(links, links_per_page)
             try:
@@ -39,16 +38,16 @@ def images(request):
             return render(request, 'splash.html', context)
 
     elif request.method == "POST":
-
+        print(request.POST.getlist('nsfw_field'))
+        print(request.POST.getlist('choice_field'))
         if 'allow' in request.POST.getlist('nsfw_field'):
-            print(request.POST.getlist('nsfw_field'))
             context = {'nsfw_filter': False, 'filter': all_filter}
             return render(request, 'splash.html', context)
         elif 'only' in request.POST.getlist('nsfw_field'):
-            print(request.POST.getlist('nsfw_field'))
             context = {'nsfw_filter': False, 'filter': nsfw_only_filter}
             return render(request, 'splash.html', context)
         else:
+            request.POST.getlist('choice_field')
             subreddits = request.POST.getlist('choice_field')
             links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
             subreddits = '!'.join(subreddits)
