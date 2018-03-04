@@ -151,8 +151,6 @@ STATICFILES_DIRS = (
 '''
 STATIC_URL = '/static/'
 
-
-
 '''
 # AWS STATIC STORAGE!
 AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
