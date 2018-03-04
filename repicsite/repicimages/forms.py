@@ -2,10 +2,14 @@ from django import forms
 from scrap.models import SubredditsList
 from django.forms import widgets
 
+
+curated_list = ['gifs', 'Natureisfuckinglit', 'funny', 'reactiongifs']
+
 SUBREDDITS = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=0)]
 SUBREDDITS_NSFW_ONLY = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=1)]
 SUBREDDITS_ALL = [(item.id,item.subreddit) for item in SubredditsList.objects.all()]
-NSFW = [('allow','Include NSFW?'),('only','Only NSFW?')]
+SPLASH = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in curated_list]
+NSFW = [('all', 'All'), ('allow', 'Include NSFW?'),('only', 'Only NSFW?')]
 
 #KICKASS META PROGRAMMING add the following class to widgets
 widgets.__all__ = list(widgets.__all__).append('CustomCheckboxSelectMultiple')
@@ -40,7 +44,7 @@ class SplashFilter(forms.Form):
         required = False,
         label = '',
         widget = CustomCheckboxSelectMultiple(attrs={'class':'form-checkbox'}),
-        choices = SUBREDDITS,
+        choices = SPLASH,
     )
 
 class FilterAll(forms.Form):
@@ -49,6 +53,13 @@ class FilterAll(forms.Form):
         label='',
         widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
         choices=SUBREDDITS_ALL,
+    )
+class FilterAllSafe(forms.Form):
+    choice_field = forms.MultipleChoiceField(
+        required=False,
+        label='',
+        widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
+        choices=SUBREDDITS,
     )
 
 class NsfwOnlyFilter(forms.Form):

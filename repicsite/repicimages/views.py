@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from random import randint
-from .forms import SplashFilter, NsfwAllow, FilterAll, NsfwOnlyFilter
+from .forms import SplashFilter, NsfwAllow, FilterAll, NsfwOnlyFilter, FilterAllSafe
 from scrap.models import Submission, SubredditsList
 
 links_per_page = 5
@@ -15,6 +15,7 @@ def images(request):
     '''
     splash_filter = SplashFilter(request.POST)
     all_filter = FilterAll(request.POST)
+    all_safe = FilterAllSafe(request.POST)
     nsfw_filter = NsfwAllow(request.POST)
     nsfw_only_filter = NsfwOnlyFilter(request.POST)
 
@@ -45,6 +46,9 @@ def images(request):
             return render(request, 'splash.html', context)
         elif 'only' in request.POST.getlist('nsfw_field'):
             context = {'nsfw_filter': False, 'filter': nsfw_only_filter}
+            return render(request, 'splash.html', context)
+        elif 'all' in request.POST.getlist('nsfw_field'):
+            context = {'nsfw_filter': False, 'filter': all_safe}
             return render(request, 'splash.html', context)
         else:
             request.POST.getlist('choice_field')
