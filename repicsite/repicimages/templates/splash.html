@@ -8,14 +8,22 @@
     <div class="col-12">
       <span class="splash-header"><a href="{% url 'images' %}"><p>&nbspR3PIC</p></a></span>
       </div>
-      <div class="col-12 "
+      <div class="col-12 category-container">
+          <a href="{% url 'all' %}" class="category-button">ALL</a>
+          <a href="{% url 'pics' %}" class="category-button">PICS</a>
+          <a href="{% url 'gifs' %}" class="category-button">GIFS</a>
+          <a href="{% url 'funny' %}" class="category-button">FUNNY</a>
+          <a href= "{% url 'wild' %}" class="category-button">WILD</a>
+
+
+      </div>
   </div>
-    <form method="post">
+    <form method="post" action="{% url 'images' %}" >
         <div class="well">
             <label class="choice-label"> </label>
             {% csrf_token %}
             {{ filter.as_table }}
-            <button id='search-button' class='pagin-button' type="submit" id="search" action="{% url 'images' %}">
+            <button id='search-button' class='pagin-button' type="submit" id="search" >
                 <span class="glyphicon glyphicon-search"></span> Go
             </button>
         </div>

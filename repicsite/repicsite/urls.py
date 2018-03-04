@@ -26,8 +26,14 @@ router.register(r'subredditsList', scrap_views.SubredditsListViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.images, name='splash'),
     path('images/', views.images, name='images'),
+    path('all/', views.all, name='all'),
+    path('pics/', views.pics, name='pics'),
+    path('gifs/', views.gifs, name='gifs'),
+    path('funny/', views.funny, name='funny'),
+    path('wild/', views.wild, name='wild'),
     path('subreddits/', scrap_views.subredditsList),
-    url(r'^subredditslist/', include(router.urls))
+    url(r'^subredditslist/', include(router.urls)),
+    path('', views.images, name='splash'),
+
 ]
