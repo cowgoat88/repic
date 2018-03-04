@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import platform
+
+
+if platform.platform().startswith('Linux'):
+    ENVIRONMENT = 'prod'
+else:
+    ENVIRONMENT = 'dev'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +27,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln'
+SECRET_KEY = os.environ.get('REPIC_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110']
+
+ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110', '192.168.1.108','192.168.0.7', '6ro6u4su0a.execute-api.us-east-1.amazonaws.com', 'r3pic.com']
+
 
 
 # Application definition
@@ -37,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'storages',
     'repicimages',
     'zappa_django_utils',
@@ -77,14 +87,22 @@ WSGI_APPLICATION = 'repicsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-        'NAME': 'sqlite.db',
-        'BUCKET': 'repic-db'
+if ENVIRONMENT == 'prod':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+            'NAME': 'sqlite.db',
+            'BUCKET': 'repic-db'    
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+            'NAME': 'sqlite.db',
+            'BUCKET': 'repic-db'
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -127,15 +145,13 @@ ROOT_PATH = os.path.dirname(__file__)
 STATIC_ROOT = os.path.join(ROOT_PATH, 'static')
 
 STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'repicimages/static/css'),
+    os.path.join(BASE_DIR, 'repicimages/static/css'),
 )
 # Local Static
-
+'''
 STATIC_URL = '/static/'
 
 '''
-
-
 # AWS STATIC STORAGE!
 AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
 AWS_STORAGE_BUCKET_NAME = 'repicbot'
@@ -146,5 +162,3 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-'''

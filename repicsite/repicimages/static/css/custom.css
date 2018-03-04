@@ -1,11 +1,18 @@
 body {
-	width:100%;
+    width:100%;
+    background-color: black;
 }
+
+.infinite-container {
+    width: 100%;
+    width: -webkit-fill-available;
+
+    }
+
 .infinite-item {
     max-width: 100%;
     max-height: 100vh;
     padding: 1px;
-    margin: 2%;
     padding-bottom: 1px;
     border: black;
     border-style: solid;
@@ -22,115 +29,206 @@ body {
     }
 
 .img-responsive {
-	max-width: 100%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+/* Buttons */
 
 .nav-buttons {
-	position: fixed;
-	display: block;
-	bottom:5%;
-	left:-5px;
-	width: 100%;
-	height:3%;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-}
-.pagin-button {
-	width:45%;
-	height:50px;
-	border:solid;
-	border-radius: 10px;
-	border-color: blue;
-	border-style: double;
-	overflow:hidden;
+    position: fixed;
+    display: block;
+    bottom: 2em;
+    left:-5px;
+    width: 100%;
+    height:3%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.nav-but-back {
-	width:20%
+@media screen and (orientation:landscape) {
+    .nav-buttons {
+        bottom: 12%;
+    }
 }
+
+.pagin-button {
+    width:35%;
+    height:50px;
+    border:solid;
+    border-radius: 10px;
+    border-color: blue;
+    border-style: double;
+    overflow:hidden;
+}
+
+.nav-but-control {
+    width:35%;
+    padding-top: .5em;
+}
+.nav-but-home {
+    width:17%;
+    text-align: center;
+
+}
+
 .nav-but-random {
-	width:20%;
+    width:20%;
 }
+
 
 button {
-	color:gray;
-	background-color: black;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
+    color:gray;
+    background-color: black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
 button:hover, button:active {
-	border-style: solid;
-	background-color: white;
-	cursor:crosshair;
+    border-style: solid;
+    background-color: white;
+}
+
+#search-button {
+    font-size:1.3em;
+    background-color: #ffffff;
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    right: 10%;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+.category-button {
+    display: inline-block;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid;
+    border-radius: 3px;
+    border-color: #413e51;
+    color: #ffffff;
+    font-size: 2em;
+    }
+
+.category-button:hover, .category-button:active {
+    background-color: #ffffff}
+
+.category-container {
+    text-align: center;
+    }
+
+#nsfw-checkbox {
+    position: relative;
+    bottom: 0px;
+
 }
 
 p {
-	font-size: 1.1em;
-	}
+    font-size: 1.1em;
+    }
 
 .container {
-	width: 100%;
+    width: 100%;
+    padding-bottom: 5em;
 
 }
 iframe {
-	height:100%;
+    height:100%;
 }
 
 
 .splash-container {
     background:black;
-    height:100vh;
+    min-height: 100vh;
 }
 
 span.splash-header {
     display: block;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top:10%;
     text-align: center;
     font-size: 3em;
+    letter-spacing: .75em;
+    text-shadow: 1px 1px #ff0000;
     font-family: 'Monoton', cursive;
 }
 
+
+@media screen and (max-width:480px) {
+     span.splash-header p {
+        font-size: .75em;
+        letter-spacing: .5em;
+     }
+ }
+
 .splash-description {
     display: block;
+    color: #787f8c;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     font-family: 'Audiowide', cursive;
 }
 
-#id_choice_field li {
-    display: inline-block;
-    border-style:ridge;
-    border-color:;
-    padding:1%;
+#id_choice_field .subreddit {
+    display: block;
+    border-style: solid;
+    border-color: #413e51;
+    padding-left:1%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0.1em;
     margin-bottom: 0.1em;
-    text-align: center;
-    font-family: 'Audiowide', cursive;
+    text-align: left;
+    font-family: 'Mukta Mahee';
     font-size:1.5em;
-    color: #337ab7;
-
+    color: #97afdb;
     }
+
+.label:active {
+    background-color:#787f8c;
+     }
+
+@media screen and (min-width: 700px) {
+    #id_choice_field .subreddit {
+        display: inline-block;
+        width: 49%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    #id_choice_field .subreddit {
+        display: inline-block;
+        width: 32%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #id_choice_field .subreddit {
+        display: inline-block;
+        width: 24%;
+    }
+}
 
 .image-metadata {
     display: block;
-    font-size: 0.75em;
+    font-size: 1em;
     color:#ffffff;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Mukta Mahee';
     }
 
 .image-metadata-left {
@@ -139,8 +237,114 @@ span.splash-header {
     padding-left: 5%;
     }
 
+.image-metadata-center {
+    display: inline-block;
+    font-size: 0.75em;
+    max-width: 50%;
+}
+
+@media screen and (min-width: 900px) {
+    .image-metadata-center {
+        display: inline-block;
+        font-size: 1em;
+        max-width: 70%;
+    }
+}
+
+@media screen and (max-width: 499px) {
+    .image-metadata-center {
+        display: none;
+        font-size: 1em;
+        max-width: 70%;
+    }
+}
+
 .image-metadata-right {
     display: inline-block;
     float: right;
     padding-right: 5%;
+    }
+
+.content-container {
+    display: block;
+}
+
+/* DJANGO FORM */
+
+.choice-label {
+    text-align: center;
+    display: block;
+    text-decoration: underline;
+    }
+
+.form-checkbox {
+    padding:0;
+}
+
+.well {
+    padding: 5px;
+    bottom: 10px;
+    background-color: black;
+    }
+
+@media screen and (min-width:385px) {
+    .well {
+        max-width: 385px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+     }
+ }
+
+@media screen and (min-width:550px) {
+     .well {
+         max-width: 550px;
+     }
+ }
+
+ @media screen and (min-width:900px) {
+      .well {
+          max-width: 900px;
+      }
+  }
+
+ul {
+    padding:0;
+    list-style: none;
+    }
+
+li {
+    list-style: none;
+    overflow: hidden;
+}
+
+.subreddit:hover {
+    background-color: #ffffff;
+}
+
+li:active {
+    border-color: pink  ;
+}
+
+input {
+    position: absolute;
+    opacity: 0;
+}
+
+#id_choice_field .clicked {
+    background: #ffffff;
+    border-color: black;
+}
+
+video {
+    width: 100% !important;
+    }
+
+video:hover {
+    autoplay: autoplay;
+    }
+
+.row {
+    max-width: 100%;
+    margin: 0;
     }

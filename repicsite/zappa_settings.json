@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "aws_region": "us-east-1",
+        "django_settings": "repicsite.settings",
+        "profile_name": "default",
+        "project_name": "repicsite",
+        "runtime": "python3.6",
+        "s3_bucket": "zappa-repic",
+        "certificate_arn": "arn:aws:acm:us-east-1:287179751129:certificate/aed1a0b4-0ef0-48aa-b627-526eb8c548d4",
+        "domain": "r3pic.com",
+        "environment_variables": {
+            "REPIC_SECRET_KEY": "cx1-59mkf+@-^dq$@17-ej-g=swilcy+qs*umpyxhul2sjytln"
+        },
+    }
+}

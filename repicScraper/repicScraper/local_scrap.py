@@ -1,16 +1,14 @@
-from .models import Submission, SubredditsList
-from rest_framework import viewsets
-from django.http import JsonResponse
-from .serializers import SubmissionSerializer, SubredditsListSerializer
 import praw
 import urllib3
+import os
 from bs4 import BeautifulSoup
 import certifi
 import requests
 import datetime
-from django.utils import timezone
 import pytz
-from zappa.async import task
+
+from databasewrapper import DatabaseWrapper
+
 
 def parse_album(url):
     manager = urllib3.PoolManager(
@@ -85,7 +83,6 @@ def url_parser(url):
         #             pass
         #     else:
         #         output = {}'''
-
         elif 'flickr' in url:
             output['url'] = flickr_parser(url)
             output['sitetag'] = 'flickr'
@@ -98,11 +95,11 @@ def url_parser(url):
 
 def pic_getter(subreddit):
     reddit = praw.Reddit(client_id='XXD7dG6-YMzifw',client_secret='3AZn44eqfJHjjeGOLddcy19AJl4',password='wilder',user_agent='test by /u/repic-bot',username='repicbot')
-    for submission in reddit.subreddit(subreddit[0]).hot(limit=25):
+    for submission in reddit.subreddit(subreddit).hot(limit=25):
         if not submission.url.endswith(('.jpg', '.JPG', '.png')):
             output = url_parser(submission.url)
             if output:
-                yield (output, submission.id, submission.score, submission.title, subreddit[1], submission.created, subreddit[0])
+                yield (output, submission.id, submission.score, submission.title, submission.created)
             else:
                 pass
         else:
@@ -110,58 +107,43 @@ def pic_getter(subreddit):
                 pass
             else:
                 output = {'url':submission.url, 'sitetag':0}
-                yield (output,submission.id, submission.score, submission.title, subreddit[1], submission.created, subreddit[0])
+                yield (output,submission.id, submission.score, submission.title, submission.created)
 
-@task
-def getSubmissions(subredditid):
-    """
-    asynchonous praw scraper.
-    """
-    subreddits = SubredditsList.objects.filter(pk=subredditid)
-    sub = [(sub.subreddit, sub.nsfw) for sub in subreddits][0]
-    print(sub)
+def getSubmissionslocal(subreddit, subredditid):
+    result = []
     db_items = []
-    for item in pic_getter(sub):
+    for item in pic_getter(subreddit):
         db_items.append(item)
-    submission = Submission()
-    try:
-        for item in db_items:
-            output = item[0]
-            #print(output.get('url'), output.get('sitetag'), output.get('mp4'), item[1], item[2])
-            submission.url = output.get('url')
-            submission.sitetag = output.get('sitetag')
-            submission.mp4 = output.get('mp4')
-            submission.id = item[1]
-            submission.score = item[2]
-            submission.title = item[3]
-            submission.nsfw = item[4]
-            time = item[5]
-            submission.created = datetime.datetime.fromtimestamp(time, tz=pytz.UTC)
-            submission.subreddit = item[6]
-            subredditobj = SubredditsList.objects.get(subreddit=item[6])
-            submission.subredditid = subredditobj.id
-            print(submission)
-            submission.save()
-    except:
-        pass
+    for item in db_items:
+        output = item[0]
+        #print(output.get('url'), output.get('sitetag'), output.get('mp4'), item[1], item[2])
+        url = output.get('url')
+        sitetag = output.get('sitetag')
+        mp4 = output.get('mp4')
+        submissionid = item[1]
+        score = item[2]
+        title = item[3]
+        time = item[4]
+        created = datetime.datetime.fromtimestamp(time)
+        result.append((submissionid, title, score, url, mp4, sitetag, created, subreddit, subredditid))
+    return result
 
-class SubmissionViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows view of praw output
-    """
-    queryset = Submission.objects.all()
-    serializer_class = SubmissionSerializer
+def main():
+    db = DatabaseWrapper('scrap_submission')
+    db.get_new_connection()
+    subredditslist = db.conn.execute('SELECT * FROM scrap_subredditslist')
+    subredditslist = [(row[1], row[0], row[2]) for row in subredditslist]
+    for sub in subredditslist:
+        outputs = getSubmissionslocal(sub[0], sub[1])
+        nsfw = sub[2]
+        for output in outputs:
+            try:
+                output = (output[0], output[1], output[2], output[3], output[4], nsfw, output[5], output[6], output[7], output[8])
+                print(output)
+                db.conn.execute('INSERT INTO scrap_submission(id, title, score, url, mp4, nsfw, sitetag, created, subreddit, subredditid) VALUES (?,?,?,?,?,?,?,?,?,?)', output)
+                db.conn.commit()
+            except Exception as e:
+                print(e)
+    db.upload_database()
+main()
     
-class SubredditsListViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint to get subreddits list
-    """
-    queryset = SubredditsList.objects.all()
-    serializer_class = SubredditsListSerializer
-    
-def asyncScrap(request):
-    subreddits = SubredditsList.objects.all()
-    for subreddit in subreddits:
-        subid = subreddit.id
-        getSubmissions(subid)
-    return JsonResponse({'status':'Success'}, status=200)
