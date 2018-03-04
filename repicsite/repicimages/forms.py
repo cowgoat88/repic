@@ -4,12 +4,20 @@ from django.forms import widgets
 
 
 curated_list = ['gifs', 'Natureisfuckinglit', 'funny', 'reactiongifs']
+pics_list = ['pics', 'gifs']
+gifs_list = ['gifs', 'WastedGifs', 'reactiongifs']
+funny_list = ['funny']
+wild_list = []
 
 SUBREDDITS = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=0)]
 SUBREDDITS_NSFW_ONLY = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=1)]
 SUBREDDITS_ALL = [(item.id,item.subreddit) for item in SubredditsList.objects.all()]
 SPLASH = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in curated_list]
-NSFW = [('all', 'All'), ('allow', 'Include NSFW?'),('only', 'Only NSFW?')]
+PICS = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in pics_list]
+GIFS = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in gifs_list]
+FUNNY = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in funny_list]
+WILD = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in wild_list]
+NSFW = [('allow', 'Include NSFW?'),('only', 'Only NSFW?')]
 
 #KICKASS META PROGRAMMING add the following class to widgets
 widgets.__all__ = list(widgets.__all__).append('CustomCheckboxSelectMultiple')
@@ -70,6 +78,37 @@ class NsfwOnlyFilter(forms.Form):
         choices=SUBREDDITS_NSFW_ONLY,
     )
 
+class picsFilter(forms.Form):
+    choice_field = forms.MultipleChoiceField(
+        required=False,
+        label='',
+        widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
+        choices=PICS,
+    )
+
+class gifsFilter(forms.Form):
+    choice_field = forms.MultipleChoiceField(
+        required=False,
+        label='',
+        widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
+        choices=GIFS,
+    )
+
+class funnyFilter(forms.Form):
+    choice_field = forms.MultipleChoiceField(
+        required=False,
+        label='',
+        widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
+        choices=FUNNY,
+    )
+
+class wildFilter(forms.Form):
+    choice_field = forms.MultipleChoiceField(
+        required=False,
+        label='',
+        widget=CustomCheckboxSelectMultiple(attrs={'class': 'form-checkbox'}),
+        choices=WILD,
+    )
 
 class NsfwAllow(forms.Form):
     nsfw_field = forms.MultipleChoiceField(

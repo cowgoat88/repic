@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('REPIC_SECRET_KEY')
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110', '192.168.1.108','192.168.0.7', '6ro6u4su0a.execute-api.us-east-1.amazonaws.com',]
+ALLOWED_HOSTS = ['192.168.1.118', '192.168.1.110', '192.168.1.108','192.168.0.7', '6ro6u4su0a.execute-api.us-east-1.amazonaws.com', 'r3pic.com']
 
 
 

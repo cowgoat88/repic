@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from random import randint
-from .forms import SplashFilter, NsfwAllow, FilterAll, NsfwOnlyFilter, FilterAllSafe
+from .forms import SplashFilter, NsfwAllow, FilterAll, NsfwOnlyFilter, FilterAllSafe, picsFilter, gifsFilter, funnyFilter, wildFilter
 from scrap.models import Submission, SubredditsList
 
 links_per_page = 5
 
 def images(request):
+    print(request.POST.getlist('choice_field'))
 
     '''
     DATABASE INTEGRATION
@@ -18,6 +19,7 @@ def images(request):
     all_safe = FilterAllSafe(request.POST)
     nsfw_filter = NsfwAllow(request.POST)
     nsfw_only_filter = NsfwOnlyFilter(request.POST)
+
 
     if request.method == "GET":
         if request.GET.get('page'):
@@ -68,3 +70,26 @@ def images(request):
 
 
     return 'dummy face'
+
+def all(request):
+    all_safe = FilterAllSafe(request.POST)
+    context = {'nsfw_filter': False, 'filter': all_safe}
+    return render(request, 'splash.html', context)
+
+def pics(request):
+    pics_filter = picsFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': pics_filter}
+    return render(request, 'splash.html', context)
+
+def gifs(request):
+    context = {'nsfw_filter': False, 'filter': gifsFilter}
+    return render(request, 'splash.html', context)
+
+def funny(request):
+    context = {'nsfw_filter': False, 'filter': funnyFilter}
+    return render(request, 'splash.html', context)
+
+def wild(request):
+    context = {'nsfw_filter': False, 'filter': wildFilter}
+    return render(request, 'splash.html', context)
+
