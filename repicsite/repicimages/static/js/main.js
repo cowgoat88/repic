@@ -1,13 +1,14 @@
 
 $(document).ready(function() {
-
-    function highlight(element) {
-      if (element.is('div')) {
-        if (element.hasClass('clicked')) {
-          element.removeClass('clicked');
+    
+    function check(element) {
+      if (element.is('input')) {
+        if (element.checked == false) {
+          element.checked = true;
         } else {
-          element.addClass('clicked');
+          element.checked = false;
         }
+      } else {
         var subreddit = element.find('input')[0];
         if (subreddit.checked == false) {
           subreddit.checked = true;
@@ -16,13 +17,19 @@ $(document).ready(function() {
         }
       }
     }
+    function highlight(element) {
+      if (element.is('div')) {
+        element.toggleClass('clicked');
+      } else {
+        var p = element.parent().closest('div');
+        p.toggleClass('clicked');
+      }
+    }
 
     $('.subreddit').click(function(e) {
-        highlight($(this));
-    });
-
-    $(".subreddit li label input").click(function(e) {
         e.stopPropagation();
-        highlight($(this).parent().parent());
-   });
+        e.preventDefault();
+        highlight($(this));
+        check($(this));
+    });
 });
