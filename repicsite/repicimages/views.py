@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from random import randint
-from .forms import SplashFilter, NsfwAllow, FilterAll, NsfwOnlyFilter, FilterAllSafe    
+from .forms import SplashFilter, NsfwAllow, FilterAll, NsfwOnlyFilter, FilterAllSafe
 from scrap.models import Submission, SubredditsList
 
 links_per_page = 5

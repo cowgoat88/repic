@@ -12,7 +12,6 @@ body {
     max-width: 100%;
     max-height: 100vh;
     padding: 1px;
-    margin: 2%;
     padding-bottom: 1px;
     border: black;
     border-style: solid;
@@ -128,6 +127,7 @@ iframe {
 
 .splash-container {
     background:black;
+    min-height: 100vh;
 }
 
 span.splash-header {
@@ -263,7 +263,6 @@ span.splash-header {
 
 .well {
     padding: 5px;
-    box-shadow: 2px 5px 10px blue;
 	bottom: 10px;
     background-color: black;
     }
