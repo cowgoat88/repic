@@ -348,3 +348,7 @@ video:hover {
     max-width: 100%;
     margin: 0;
     }
+
+#nsfw-form:hover {
+    background-color: white;
+}

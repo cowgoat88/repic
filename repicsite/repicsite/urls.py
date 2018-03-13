@@ -35,5 +35,6 @@ urlpatterns = [
     path('subreddits/', scrap_views.subredditsList),
     url(r'^subredditslist/', include(router.urls)),
     path('', views.images, name='splash'),
+    path('nsfw/', views.nsfw, name='nsfw')
 
 ]
