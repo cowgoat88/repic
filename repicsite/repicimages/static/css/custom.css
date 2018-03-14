@@ -257,6 +257,9 @@ span.splash-header {
         font-size: 1em;
         max-width: 70%;
     }
+    .image-metadata {
+        font-size: 0.66em;
+    }
 }
 
 .image-metadata-right {
