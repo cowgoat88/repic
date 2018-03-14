@@ -95,19 +95,28 @@ def url_parser(url):
 
 def pic_getter(subreddit):
     reddit = praw.Reddit(client_id='XXD7dG6-YMzifw',client_secret='3AZn44eqfJHjjeGOLddcy19AJl4',password='wilder',user_agent='test by /u/repic-bot',username='repicbot')
+    image_metric = 10
     for submission in reddit.subreddit(subreddit).hot(limit=25):
         if not submission.url.endswith(('.jpg', '.JPG', '.png')):
             output = url_parser(submission.url)
             if output:
+                image_metric += 1
                 yield (output, submission.id, submission.score, submission.title, submission.created)
             else:
+                image_metric -= 1
                 pass
         else:
             if 'gifly' in submission.url:
                 pass
             else:
+                image_metric += 1
                 output = {'url':submission.url, 'sitetag':0}
                 yield (output,submission.id, submission.score, submission.title, submission.created)
+        if image_metric < 1:
+            print(subreddit, ' low image count')
+            break
+
+
 
 def getSubmissionslocal(subreddit, subredditid):
     result = []
@@ -139,11 +148,10 @@ def main():
         for output in outputs:
             try:
                 output = (output[0], output[1], output[2], output[3], output[4], nsfw, output[5], output[6], output[7], output[8])
-                print(output)
+                #print(output)
                 db.conn.execute('INSERT INTO scrap_submission(id, title, score, url, mp4, nsfw, sitetag, created, subreddit, subredditid) VALUES (?,?,?,?,?,?,?,?,?,?)', output)
                 db.conn.commit()
             except Exception as e:
                 print(e)
     db.upload_database()
 main()
-    
