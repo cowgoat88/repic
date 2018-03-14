@@ -77,61 +77,21 @@ def all(request):
     return render(request, 'splash.html', context)
 
 def pics(request):
-    subreddits = ['44','45','56','69']
-    links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
-    subreddits = '!'.join(subreddits)
-
-    page = request.GET.get('page', 1)
-    paginator = Paginator(links, links_per_page)
-    try:
-        numbers = paginator.page(page)
-    except PageNotAnInteger:
-        numbers = paginator.page(1)
-    except EmptyPage:
-        numbers = paginator.page(paginator.num_pages)
-    return render(request, 'images.html', {'links': numbers, 'subreddits': subreddits})
+    pics_filter = picsFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': pics_filter}
+    return render(request, 'splash.html', context)
 
 def gifs(request):
-    subreddits = ['16','20','22','30','38']
-    links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
-    subreddits = '!'.join(subreddits)
-
-    page = request.GET.get('page', 1)
-    paginator = Paginator(links, links_per_page)
-    try:
-        numbers = paginator.page(page)
-    except PageNotAnInteger:
-        numbers = paginator.page(1)
-    except EmptyPage:
-        numbers = paginator.page(paginator.num_pages)
-    return render(request, 'images.html', {'links': numbers, 'subreddits': subreddits})
+    gifs_filter = gifsFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': gifs_filter}
+    return render(request, 'splash.html', context)
 
 def funny(request):
-    subreddits = ['36','37','26','20','46','49']
-    links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
-    subreddits = '!'.join(subreddits)
-
-    page = request.GET.get('page', 1)
-    paginator = Paginator(links, links_per_page)
-    try:
-        numbers = paginator.page(page)
-    except PageNotAnInteger:
-        numbers = paginator.page(1)
-    except EmptyPage:
-        numbers = paginator.page(paginator.num_pages)
-    return render(request, 'images.html', {'links': numbers, 'subreddits': subreddits})
+    funny_filter = funnyFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': funny_filter}
+    return render(request, 'splash.html', context)
 
 def wild(request):
-    subreddits = ['27','39','52','55']
-    links = Submission.objects.filter(subredditid__in=subreddits).order_by('-score')[:50]
-    subreddits = '!'.join(subreddits)
-
-    page = request.GET.get('page', 1)
-    paginator = Paginator(links, links_per_page)
-    try:
-        numbers = paginator.page(page)
-    except PageNotAnInteger:
-        numbers = paginator.page(1)
-    except EmptyPage:
-        numbers = paginator.page(paginator.num_pages)
-    return render(request, 'images.html', {'links': numbers, 'subreddits': subreddits})
+    wild_filter = wildFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': wild_filter}
+    return render(request, 'splash.html', context)

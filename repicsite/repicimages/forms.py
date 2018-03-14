@@ -6,8 +6,8 @@ from django.forms import widgets
 curated_list = ['gifs', 'Natureisfuckinglit', 'funny', 'reactiongifs', 'pics']
 pics_list = ['pics', 'gifs']
 gifs_list = ['gifs', 'WastedGifs', 'reactiongifs']
-funny_list = ['funny']
-wild_list = []
+funny_list = ['gifs', 'funny']
+wild_list = ['gifs']
 
 SUBREDDITS = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=0)]
 SUBREDDITS_NSFW_ONLY = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=1)]
