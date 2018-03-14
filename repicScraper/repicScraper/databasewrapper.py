@@ -41,14 +41,14 @@ class DatabaseWrapper():
         # upload the local copy on every close
         if os.path.isfile(self.local_db):
             self.s3obj.upload_file(self.local_db)
-            
+
     def get_max_id(self):
-        sql = 'SELECT MAX(id) FROM ?'
+        sql = 'SELECT MAX(id) FROM scrap_subredditslist'
         c = self.conn.cursor()
-        c.execute(sql, (self.database))
+        c.execute(sql)
         max_id = c.fetchone()
         return max_id[0]
-        
+
     def get_all_subreddits(self):
         sql = 'SELECT subreddit FROM scrap_subredditslist'
         c = self.conn.cursor()
