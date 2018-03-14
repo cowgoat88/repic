@@ -67,8 +67,8 @@ def images(request):
     return 'dummy face'
 
 def nsfw(request):
-    all_filter = FilterAll(request.POST)
-    context = {'nsfw_filter': False, 'filter': all_filter}
+    nsfw_only_filter = NsfwOnlyFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': nsfw_only_filter}
     return render(request, 'splash.html', context)
 
 def all(request):
