@@ -43,7 +43,7 @@ class DatabaseWrapper():
             self.s3obj.upload_file(self.local_db)
 
     def get_max_id(self):
-        sql = 'SELECT MAX(id) FROM scrap_subredditslist'
+        sql = 'SELECT MAX(id) FROM ?'
         c = self.conn.cursor()
         c.execute(sql)
         max_id = c.fetchone()
