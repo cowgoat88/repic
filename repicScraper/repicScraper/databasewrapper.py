@@ -51,7 +51,7 @@ class DatabaseWrapper():
         return max_id[0]
 
     def get_all_subreddits(self):
-        sql = 'SELECT subredditid FROM scrap_subredditslist'
+        sql = 'SELECT subreddit FROM scrap_subredditslist'
         c = self.conn.cursor()
         c.execute(sql)
         return [row[0] for row in c.fetchall()]
