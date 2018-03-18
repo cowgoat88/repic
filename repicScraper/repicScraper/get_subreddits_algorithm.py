@@ -34,6 +34,16 @@ def subreddit_updater(new_to_add):
         cursor.execute(sql, (max_id, subreddit[1], subreddit[2], 'all', '', ''))
         db.conn.commit()
     db.close()
+def clean_up_db():
+        db = DatabaseWrapper('sqlite.db', 'scrap_subredditslist')
+        db.get_new_connection()
+        cursor = db.conn.cursor()
+        cursor.execute("""delete from scrap_subredditslist
+                        where id between 209 and 236;""")
+        db.conn.commit()
+        db.close()
 
-new_subs_to_add = subreddit_getter()
-subreddit_updater(new_subs_to_add)
+#new_subs_to_add = subreddit_getter()
+#subreddit_updater(new_subs_to_add)
+
+#clean_up_db()
