@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'zappa_django_utils',
     'scrap',
-
 ]
 
 MIDDLEWARE = [
