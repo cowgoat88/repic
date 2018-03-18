@@ -110,11 +110,13 @@ def url_parser(url):
 
 def pic_getter(subreddit):
     reddit = praw.Reddit(client_id='XXD7dG6-YMzifw',client_secret='3AZn44eqfJHjjeGOLddcy19AJl4',password='wilder',user_agent='test by /u/repic-bot',username='repicbot')
-    image_metric = 10
+    image_metric = 15
     submissions_db = DatabaseWrapper('sqlite.db', 'scrap_submission')
     submissions_db.get_new_connection()
     submissions_ids = [row[0] for row in submissions_db.conn.execute('SELECT id FROM scrap_submission')]
     submissions_db.close()
+    print(subreddit, '\t=============')
+
     for submission in reddit.subreddit(subreddit).hot(limit=25):
         if submission.id in submissions_ids:
             pass
@@ -126,6 +128,7 @@ def pic_getter(subreddit):
                     yield (output, submission.id, submission.score, submission.title, submission.created)
                 else:
                     image_metric -= 1
+                    print(image_metric)
                     pass
             else:
                 if 'gifly' in submission.url:
@@ -135,7 +138,15 @@ def pic_getter(subreddit):
                     output = {'url':submission.url, 'sitetag':0}
                     yield (output,submission.id, submission.score, submission.title, submission.created)
             if image_metric < 1:
-                print(subreddit, ' low image count')
+                print(subreddit, 'low image count')
+                sub_db = DatabaseWrapper('sqlite.db', 'scrap_subredditslist')
+                sub_db.get_new_connection()
+                cursor = sub_db.conn.cursor()
+                cursor.execute("""  UPDATE scrap_subredditslist
+                                    SET cat3 = 'hide'
+                                    WHERE subreddit = ?""", (subreddit,))
+                sub_db.conn.commit()
+                sub_db.close()
                 return False
 
 
@@ -143,23 +154,23 @@ def pic_getter(subreddit):
 def getSubmissionslocal(subreddit, subredditid):
     result = []
     db_items = []
-    while True:
-        for item in pic_getter(subreddit):
-            db_items.append(item)
-        for item in db_items:
-            output = item[0]
-            #print(output.get('url'), output.get('sitetag'), output.get('mp4'), item[1], item[2])
-            url = output.get('url')
-            sitetag = output.get('sitetag')
-            mp4 = output.get('mp4')
-            submissionid = item[1]
-            score = item[2]
-            title = item[3]
-            time = item[4]
-            created = datetime.datetime.fromtimestamp(time)
-            result.append((submissionid, title, score, url, mp4, sitetag, created, subreddit, subredditid))
-        return result
-    return False
+
+    for item in pic_getter(subreddit):
+        db_items.append(item)
+    for item in db_items:
+        output = item[0]
+        #print(output.get('url'), output.get('sitetag'), output.get('mp4'), item[1], item[2])
+        url = output.get('url')
+        sitetag = output.get('sitetag')
+        mp4 = output.get('mp4')
+        submissionid = item[1]
+        score = item[2]
+        title = item[3]
+        time = item[4]
+        created = datetime.datetime.fromtimestamp(time)
+        result.append((submissionid, title, score, url, mp4, sitetag, created, subreddit, subredditid))
+    return result
+
 
 def main():
     db = DatabaseWrapper('sqlite.db', 'scrap_submission')
@@ -173,22 +184,13 @@ def main():
         nsfw = sub[2]
         for output in outputs:
             try:
-                if output == False:
-                    db.get_new_connection()
-                    cursor = db.conn.cursor()
-                    cursor.execute("""  UPDATE scrap_subredditslist
-                                        SET cat3 = 'False'
-                                        WHERE subreddit = ? """, (subreddit,))
-                    db.conn.commit()
-                    db.close()
-                else:
-                    print(output)
-                    output = (output[0], output[1], output[2], output[3], output[4], nsfw, output[5], output[6], output[7], output[8])
-                    #print(output)
-                    db.get_new_connection()
-                    db.conn.execute('INSERT INTO scrap_submission(id, title, score, url, mp4, nsfw, sitetag, created, subreddit, subredditid) VALUES (?,?,?,?,?,?,?,?,?,?)', output)
-                    db.conn.commit()
-                    db.close()
+                print(output)
+                output = (output[0], output[1], output[2], output[3], output[4], nsfw, output[5], output[6], output[7], output[8])
+                #print(output)
+                db.get_new_connection()
+                db.conn.execute('INSERT INTO scrap_submission(id, title, score, url, mp4, nsfw, sitetag, created, subreddit, subredditid) VALUES (?,?,?,?,?,?,?,?,?,?)', output)
+                db.conn.commit()
+                db.close()
             except Exception as e:
                 print(e)
     db.get_new_connection()
