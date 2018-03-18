@@ -7,16 +7,18 @@ curated_list = ['gifs', 'Natureisfuckinglit', 'funny', 'reactiongifs', 'pics']
 pics_list = ['pics', 'gifs']
 gifs_list = ['gifs', 'WastedGifs', 'reactiongifs']
 funny_list = ['gifs', 'funny']
-wild_list = ['gifs']
+wild_list = ['gifs','behindthegifs']
 
-SUBREDDITS = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=0)]
+BASE_DB = SubredditsList.objects.all().exclude(cat3='hide')
+
+SUBREDDITS = [(item.id,item.subreddit) for item in BASE_DB.filter(nsfw=0)]
 SUBREDDITS_NSFW_ONLY = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=1)]
 SUBREDDITS_ALL = [(item.id,item.subreddit) for item in SubredditsList.objects.all()]
-SPLASH = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=0).order_by('?')[:8]]
+SPLASH = [(item.id,item.subreddit) for item in BASE_DB.filter(nsfw=0).order_by('?')[:8]]
 PICS = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in pics_list]
 GIFS = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in gifs_list]
 FUNNY = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in funny_list]
-WILD = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in wild_list]
+WILD = [(item.id,item.subreddit) for item in BASE_DB if item.subreddit in wild_list]
 NSFW = [('allow', 'Include NSFW?'),('only', 'Only NSFW?')]
 
 #KICKASS META PROGRAMMING add the following class to widgets
