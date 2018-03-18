@@ -68,18 +68,18 @@ def url_parser(url):
             output['mp4'] = url.replace('gifv', 'mp4')
         elif url.endswith('gif'):
             output = {'url':url, 'sitetag':'gifv'}
+        elif url.endswith('mp4'):
+            print('=============',url)
+            output = {'url':url, 'sitetag':'mp4'}
         elif 'imgur.com/' in url:
             m = re.search('(?<=imgur.com/).{7}', url)
-            check_this_url = 'https://i.imgur.com/{m.group(0)}.jpg'
+            check_this_url = f'https://i.imgur.com/{m.group(0)}.jpg'
             if requests.get(check_this_url).ok == True:
                 output = {'url':check_this_url, 'sitetag':0}
-                print(check_this_url)
             else:
-                check_this_url = 'https://i.imgur.com/{m.group(0)}.mp4'
+                check_this_url = f'https://i.imgur.com/{m.group(0)}.mp4'
                 if requests.get(check_this_url).ok == True:
                     output = {'url':check_this_url, 'sitetag':'imgurgifv'}
-                    print(check_this_url)
-
         # '''elif 'imgur.com/' in url:
         #     print('imgur album handling...')
         #     urls = parse_album(url)
@@ -101,7 +101,7 @@ def url_parser(url):
             output['url'] = flickr_parser(url)
             output['sitetag'] = 'flickr'
         else:
-            #print('OUTLIER:', url)
+            print('OUTLIER:', url)
             pass
         return output
     except Exception as e:
@@ -175,18 +175,18 @@ def getSubmissionslocal(subreddit, subredditid):
 def main():
     db = DatabaseWrapper('sqlite.db', 'scrap_submission')
     db.get_new_connection()
-    subredditslist = db.conn.execute('SELECT * FROM scrap_subredditslist')
+    subredditslist = db.conn.execute("SELECT * FROM scrap_subredditslist WHERE cat3 <> 'hide'")
     subredditslist = [(row[1], row[0], row[2]) for row in subredditslist]
     db.close()
 
     for sub in subredditslist:
+
         outputs = getSubmissionslocal(sub[0], sub[1])
         nsfw = sub[2]
         for output in outputs:
             try:
                 print(output)
                 output = (output[0], output[1], output[2], output[3], output[4], nsfw, output[5], output[6], output[7], output[8])
-                #print(output)
                 db.get_new_connection()
                 db.conn.execute('INSERT INTO scrap_submission(id, title, score, url, mp4, nsfw, sitetag, created, subreddit, subredditid) VALUES (?,?,?,?,?,?,?,?,?,?)', output)
                 db.conn.commit()

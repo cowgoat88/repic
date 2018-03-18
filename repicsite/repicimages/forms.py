@@ -4,20 +4,20 @@ from django.forms import widgets
 
 
 curated_list = ['gifs', 'Natureisfuckinglit', 'funny', 'reactiongifs', 'pics']
-pics_list = ['pics', 'gifs']
-gifs_list = ['gifs', 'WastedGifs', 'reactiongifs']
-funny_list = ['gifs', 'funny']
-wild_list = ['gifs','behindthegifs']
+pics_list = ['pics', 'mildlyinteresting', 'wallpaper', 'funny', 'memes', 'perfecttiming', 'ExpectationVsReality', 'wholesomemems', 'itookapicture']
+gifs_list = ['gifs', 'WastedGifs', 'NatureIsFuckingLit', 'reactiongifs', 'holdmycatnip', 'bettereveryloop', 'wholesomegifs', 'BetterEveryLoop']
+funny_list = ['gifs', 'funny', 'FifthWorldPics', 'facepalm', 'memes', 'MadeMeSmile', 'shittyreactiongifs', 'ProgrammerHumor']
+wild_list = ['Unexpected','beamazed', 'FifthWorldPics', 'interestingasfuck', 'rickandmorty', 'NatureIsFuckingLit', 'Eyebleach', 'Pareidolia']
 
-BASE_DB = SubredditsList.objects.all().exclude(cat3='hide')
+BASE_DB = SubredditsList.objects.exclude(cat3='hide')
 
 SUBREDDITS = [(item.id,item.subreddit) for item in BASE_DB.filter(nsfw=0)]
 SUBREDDITS_NSFW_ONLY = [(item.id,item.subreddit) for item in SubredditsList.objects.filter(nsfw=1)]
-SUBREDDITS_ALL = [(item.id,item.subreddit) for item in SubredditsList.objects.all()]
+SUBREDDITS_ALL = [(item.id,item.subreddit) for item in BASE_DB]
 SPLASH = [(item.id,item.subreddit) for item in BASE_DB.filter(nsfw=0).order_by('?')[:8]]
-PICS = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in pics_list]
-GIFS = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in gifs_list]
-FUNNY = [(item.id,item.subreddit) for item in SubredditsList.objects.all() if item.subreddit in funny_list]
+PICS = [(item.id,item.subreddit) for item in BASE_DB if item.subreddit in pics_list]
+GIFS = [(item.id,item.subreddit) for item in BASE_DB if item.subreddit in gifs_list]
+FUNNY = [(item.id,item.subreddit) for item in BASE_DB if item.subreddit in funny_list]
 WILD = [(item.id,item.subreddit) for item in BASE_DB if item.subreddit in wild_list]
 NSFW = [('allow', 'Include NSFW?'),('only', 'Only NSFW?')]
 
