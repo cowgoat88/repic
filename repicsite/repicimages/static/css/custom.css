@@ -60,7 +60,7 @@ body {
     height:50px;
     border:solid;
     border-radius: 10px;
-    border-color: blue;
+    border-color: #1148a0;
     border-style: double;
     overflow:hidden;
 }
@@ -257,6 +257,9 @@ span.splash-header {
         font-size: 1em;
         max-width: 70%;
     }
+    .image-metadata {
+        font-size: 0.66em;
+    }
 }
 
 .image-metadata-right {
@@ -348,3 +351,7 @@ video:hover {
     max-width: 100%;
     margin: 0;
     }
+
+#nsfw-form:hover {
+    background-color: white;
+}

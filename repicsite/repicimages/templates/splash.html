@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
+{% block extrahead %}
+<script src="{% static 'js/splash.js' %}"></script>
+{% endblock extrahead %}
 {% block basecontent %}
+
 
 
 <div class="container splash-container">
@@ -24,7 +28,7 @@
             {% csrf_token %}
             {{ filter.as_table }}
             <button id='search-button' class='pagin-button' type="submit" id="search" >
-                <span class="glyphicon glyphicon-search"></span> Go
+                <span class="glyphicon glyphicon-search"></span> View Selection
             </button>
         </div>
     </form>
@@ -32,12 +36,7 @@
     {% else %}
         <form id="nsfw-checkbox" method="post">
             <div class="well">
-                <label class="choice-label"></label>
-                {% csrf_token %}
-                {{ nsfw_filter.as_table }}
-                <button type="submit" action="{% url 'images' %}">
-                    Are you over 18?
-                </button>
+                <label id="nsfw-form">Are you over 18?</a>
             </div>
         </form>
     {% endif %}

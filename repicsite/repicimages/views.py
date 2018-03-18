@@ -9,11 +9,6 @@ links_per_page = 5
 def images(request):
     print(request.POST.getlist('choice_field'))
 
-    '''
-    DATABASE INTEGRATION
-    :param request:
-    :return links to display:
-    '''
     splash_filter = SplashFilter(request.POST)
     all_filter = FilterAll(request.POST)
     all_safe = FilterAllSafe(request.POST)
@@ -71,6 +66,11 @@ def images(request):
 
     return 'dummy face'
 
+def nsfw(request):
+    nsfw_only_filter = NsfwOnlyFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': nsfw_only_filter}
+    return render(request, 'splash.html', context)
+
 def all(request):
     all_safe = FilterAllSafe(request.POST)
     context = {'nsfw_filter': False, 'filter': all_safe}
@@ -82,14 +82,16 @@ def pics(request):
     return render(request, 'splash.html', context)
 
 def gifs(request):
-    context = {'nsfw_filter': False, 'filter': gifsFilter}
+    gifs_filter = gifsFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': gifs_filter}
     return render(request, 'splash.html', context)
 
 def funny(request):
-    context = {'nsfw_filter': False, 'filter': funnyFilter}
+    funny_filter = funnyFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': funny_filter}
     return render(request, 'splash.html', context)
 
 def wild(request):
-    context = {'nsfw_filter': False, 'filter': wildFilter}
+    wild_filter = wildFilter(request.POST)
+    context = {'nsfw_filter': False, 'filter': wild_filter}
     return render(request, 'splash.html', context)
-
