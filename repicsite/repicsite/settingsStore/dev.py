@@ -4,7 +4,7 @@ DATABASES = {
       'default': {
           'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
           'NAME': 'sqlite.db',
-          'BUCKET': 'repic-db'    
+          'BUCKET': 'repic-db'
       }
 }
 

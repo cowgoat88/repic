@@ -1,13 +1,12 @@
 body {
-    width:100%;
+    width: 100%;
     background-color: black;
 }
 
 .infinite-container {
     width: 100%;
     width: -webkit-fill-available;
-
-    }
+}
 
 .infinite-item {
     max-width: 100%;
@@ -20,16 +19,16 @@ body {
     background-color: black;
     overflow: hidden;
     display: block;
-
 }
 
 .infinite-border {
     margin: 2%;
     margin-top: 1%;
-    }
+}
 
 .img-responsive {
     max-width: 100%;
+    max-height: 100vh;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -41,61 +40,59 @@ body {
     position: fixed;
     display: block;
     bottom: 2em;
-    left:-5px;
+    left: -5px;
     width: 100%;
-    height:3%;
+    height: 3%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
 
-@media screen and (orientation:landscape) {
+@media screen and (orientation: landscape) {
     .nav-buttons {
         bottom: 12%;
     }
 }
 
 .pagin-button {
-    width:35%;
-    height:50px;
-    border:solid;
+    width: 35%;
+    height: 50px;
+    border: solid;
     border-radius: 10px;
     border-color: #1148a0;
     border-style: double;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .nav-but-control {
-    width:35%;
-    padding-top: .5em;
+    width: 35%;
+    padding-top: 0.5em;
 }
 .nav-but-home {
-    width:17%;
+    width: 17%;
     text-align: center;
-
 }
 
 .nav-but-random {
-    width:20%;
+    width: 20%;
 }
 
-
 button {
-    color:gray;
+    color: gray;
     background-color: black;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
 
-
-button:hover, button:active {
+button:hover,
+button:active {
     border-style: solid;
     background-color: white;
 }
 
 #search-button {
-    font-size:1.3em;
+    font-size: 1.3em;
     background-color: #ffffff;
     display: block;
     position: fixed;
@@ -104,7 +101,7 @@ button:hover, button:active {
     width: 200px;
     margin-left: auto;
     margin-right: auto;
-    }
+}
 
 .category-button {
     display: inline-block;
@@ -116,37 +113,36 @@ button:hover, button:active {
     border-color: #413e51;
     color: #ffffff;
     font-size: 2em;
-    }
+}
 
-.category-button:hover, .category-button:active {
-    background-color: #ffffff}
+.category-button:hover,
+.category-button:active {
+    background-color: #ffffff;
+}
 
 .category-container {
     text-align: center;
-    }
+}
 
 #nsfw-checkbox {
     position: relative;
     bottom: 0px;
-
 }
 
 p {
     font-size: 1.1em;
-    }
+}
 
 .container {
     width: 100%;
     padding-bottom: 5em;
-
 }
 iframe {
-    height:100%;
+    height: 100%;
 }
 
-
 .splash-container {
-    background:black;
+    background: black;
     min-height: 100vh;
 }
 
@@ -155,21 +151,20 @@ span.splash-header {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top:10%;
+    margin-top: 10%;
     text-align: center;
     font-size: 3em;
-    letter-spacing: .75em;
+    letter-spacing: 0.75em;
     text-shadow: 1px 1px #ff0000;
     font-family: 'Monoton', cursive;
 }
 
-
-@media screen and (max-width:480px) {
-     span.splash-header p {
-        font-size: .75em;
-        letter-spacing: .5em;
-     }
- }
+@media screen and (max-width: 480px) {
+    span.splash-header p {
+        font-size: 0.75em;
+        letter-spacing: 0.5em;
+    }
+}
 
 .splash-description {
     display: block;
@@ -184,20 +179,20 @@ span.splash-header {
     display: block;
     border-style: solid;
     border-color: #413e51;
-    padding-left:1%;
+    padding-left: 1%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0.1em;
     margin-bottom: 0.1em;
     text-align: left;
     font-family: 'Mukta Mahee';
-    font-size:1.5em;
+    font-size: 1.5em;
     color: #97afdb;
-    }
+}
 
 .label:active {
-    background-color:#787f8c;
-     }
+    background-color: #787f8c;
+}
 
 @media screen and (min-width: 700px) {
     #id_choice_field .subreddit {
@@ -223,19 +218,19 @@ span.splash-header {
 .image-metadata {
     display: block;
     font-size: 1em;
-    color:#ffffff;
+    color: #ffffff;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     font-family: 'Mukta Mahee';
-    }
+}
 
 .image-metadata-left {
     display: inline-block;
     float: left;
     padding-left: 5%;
-    }
+}
 
 .image-metadata-center {
     display: inline-block;
@@ -266,7 +261,7 @@ span.splash-header {
     display: inline-block;
     float: right;
     padding-right: 5%;
-    }
+}
 
 .content-container {
     display: block;
@@ -278,43 +273,43 @@ span.splash-header {
     text-align: center;
     display: block;
     text-decoration: underline;
-    }
+}
 
 .form-checkbox {
-    padding:0;
+    padding: 0;
 }
 
 .well {
     padding: 5px;
     bottom: 10px;
     background-color: black;
-    }
+}
 
-@media screen and (min-width:385px) {
+@media screen and (min-width: 385px) {
     .well {
         max-width: 385px;
         display: block;
         margin-left: auto;
         margin-right: auto;
-     }
- }
+    }
+}
 
-@media screen and (min-width:550px) {
-     .well {
-         max-width: 550px;
-     }
- }
+@media screen and (min-width: 550px) {
+    .well {
+        max-width: 550px;
+    }
+}
 
- @media screen and (min-width:900px) {
-      .well {
-          max-width: 900px;
-      }
-  }
+@media screen and (min-width: 900px) {
+    .well {
+        max-width: 900px;
+    }
+}
 
 ul {
-    padding:0;
+    padding: 0;
     list-style: none;
-    }
+}
 
 li {
     list-style: none;
@@ -326,7 +321,7 @@ li {
 }
 
 li:active {
-    border-color: pink  ;
+    border-color: pink;
 }
 
 input {
@@ -341,16 +336,16 @@ input {
 
 video {
     width: 100% !important;
-    }
+}
 
 video:hover {
     autoplay: autoplay;
-    }
+}
 
 .row {
     max-width: 100%;
     margin: 0;
-    }
+}
 
 #nsfw-form:hover {
     background-color: white;
